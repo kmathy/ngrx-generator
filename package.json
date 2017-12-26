@@ -14,10 +14,6 @@
   "bin": {
     "ngx-reduxor": "index.js"
   },
-  "ngxReduxor": {
-    "basePath": "./store",
-    "separateDirectory": false
-  },
   "peerDependencies": {
     "@ngrx/effects": "^4.1.1",
     "@ngrx/store": "^4.1.1",
