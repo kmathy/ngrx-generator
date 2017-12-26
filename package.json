@@ -19,17 +19,14 @@
     "separateDirectory": false
   },
   "peerDependencies": {
-    "@ngrx/store": "^4.1.1",
     "@ngrx/effects": "^4.1.1",
+    "@ngrx/store": "^4.1.1",
     "@ngrx/store-devtools": "^4.1.1"
   },
   "dependencies": {
-    "plop": "^1.8.0",
-    "find-package-json": "^1.0.0",
+    "fs-extra": "^5.0.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.get": "^4.4.2",
-    "npm-run": "^4.1.2",
-    "pkg-dir": "^2.0.0",
-    "shelljs": "^0.7.8"
+    "plop": "^1.8.0"
   }
 }

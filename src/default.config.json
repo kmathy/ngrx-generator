@@ -1,0 +1,4 @@
+{
+    "BASE_PATH": "./src/store",
+    "SEPARATE_DIRECTORY": false
+}

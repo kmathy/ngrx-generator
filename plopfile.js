@@ -1,22 +1,14 @@
 // Libraries
 const get = require('lodash.get');
 const camelCase = require('lodash.camelcase');
-const pkg = require('./package.json');
-const finder = require('find-package-json');
-const pjson = finder().next().value;
-const nodePath = require('path');
-const pkgDir = require('pkg-dir');
-const fs = require('fs');
-
+const path = require('path');
+const fs = require('fs-extra');
+const defaultOptions = fs.readJsonSync(path.resolve(__dirname, './src/default.config.json'), 'utf-8')
+let options;
 // Source code
-const basicGenerators = require('./src/basic-generators');
-const crudGenerators = require('./src/crud-generators');
-const modulesGenerators = require('./src/modules-generators');
-
-const options = {
-  basePath: "ngxReduxor.basePath",
-  separateDirectory: "ngxReduxor.separateDirectory"
-};
+const basicGenerators = require('./src/generators/basic-generators');
+const crudGenerators = require('./src/generators/crud-generators');
+const modulesGenerators = require('./src/generators/modules-generators');
 
 function validate(name) {
   return (/.+/).test(name) ? true : `A name is required`;
@@ -47,9 +39,9 @@ function createGenerator(plop) {
             actions = actions.concat(basicGenerators.action, basicGenerators.reducer, basicGenerators.effect, basicGenerators.service);
             break;
         }
-        const indexExists = fs.existsSync(nodePath.resolve(get(pjson, options.basePath), 'app.store.ts'));
-        const allEffectsExists = fs.existsSync(nodePath.resolve(get(pjson, options.basePath), 'all-effects.ts'));
-        const storeReduxorModuleExists = fs.existsSync(nodePath.resolve(get(pjson, options.basePath), 'store-reduxor.module.ts'));
+        const indexExists = fs.existsSync(options.BASE_PATH, 'app.store.ts');
+        const allEffectsExists = fs.existsSync(options.BASE_PATH, 'all-effects.ts');
+        const storeReduxorModuleExists = fs.existsSync(options.BASE_PATH, 'store-reduxor.module.ts');
         actions = indexExists ? actions.concat(modulesGenerators.updateIndex) : actions.concat(modulesGenerators.addIndex);
         actions = allEffectsExists ? actions.concat(modulesGenerators.updateAllEffects) : actions.concat(modulesGenerators.addAllEffects);
         actions = storeReduxorModuleExists ? actions.concat(modulesGenerators.updateStoreReduxorModule) : actions.concat(modulesGenerators.addStoreReduxorModule);
@@ -61,20 +53,28 @@ function createGenerator(plop) {
 }
 
 module.exports = function (plop) {
-  if(!get(pjson, options.basePath)) {
-    console.log(`The option ${options.basePath} is not set inside your package.json, please update it`.red);
-    process.exit(1);
+  if(!fs.existsSync('./ngx-reduxor.config.json')) {
+    console.log(`The config file doesn't exist`.yellow)
+    try {
+      fs.outputJsonSync('./ngx-reduxor.config.json', defaultOptions, {spaces: '\t'});
+      console.log(`The config file has been created.`.green)
+      options = fs.readJsonSync('./ngx-reduxor.config.json', 'utf-8')
+    } catch(err) {
+      console.log(`err`.red);
+      process.exit(1);
+    }
+  } else {
+    options = fs.readJsonSync('./ngx-reduxor.config.json', 'utf-8');
   }
+
+  plop.addHelper('basePath', () => path.resolve(options.BASE_PATH));
   
-  plop.addHelper('basePath', () => nodePath.resolve(get(pjson, options.basePath)));
+  plop.addHelper('folder', (name, type) => options.SEPARATE_DIRECTORY ? type : camelCase(name));
   
-  plop.addHelper('folder', (name, type) => get(pjson, options.separateDirectory) ? type : camelCase(name));
-  
-  plop.addHelper('position', (name) => get(pjson, options.separateDirectory) ? '../' + name : '.');
+  plop.addHelper('position', (name) => options.SEPARATE_DIRECTORY ? '../' + name : '.');
   
   plop.setActionType('update app.store', (data, config) => {
-    console.log(data)
-    const makeDestPath = p => nodePath.resolve(plop.getDestBasePath(), p);
+    const makeDestPath = p => path.resolve(plop.getDestBasePath(), p);
     const fileDestPath = makeDestPath(plop.renderString(config.path));
     try {
       let fileData = fs.readFileSync(fileDestPath, 'utf-8');
@@ -86,14 +86,14 @@ module.exports = function (plop) {
         .replace(/(\/\/ -- IMPORT STATE --)/, plop.renderString(importState, data))
         .replace(/(\/\/ -- ADD REDUCER --)/, plop.renderString(addReducer, data));
       fs.writeFileSync(fileDestPath, fileData);
-      return fileDestPath.replace(nodePath.resolve(plop.getDestBasePath()), '');
+      return fileDestPath.replace(path.resolve(plop.getDestBasePath()), '');
     } catch(err) {
       throw typeof err === 'string' ? err : err.message || JSON.stringify(err);
     }
   })
 
   plop.setActionType('update all-effects', (data, config) => {
-    const makeDestPath = p => nodePath.resolve(plop.getDestBasePath(), p);
+    const makeDestPath = p => path.resolve(plop.getDestBasePath(), p);
     const fileDestPath = makeDestPath(plop.renderString(config.path));
     try {
       let fileData = fs.readFileSync(fileDestPath, 'utf-8');
@@ -103,14 +103,14 @@ module.exports = function (plop) {
         .replace(/(\/\/ -- IMPORT --)/, plop.renderString(importFile, data))
         .replace(/(\/\/ -- LIST --)/, plop.renderString(listEffect, data))
       fs.writeFileSync(fileDestPath, fileData);
-      return fileDestPath.replace(nodePath.resolve(plop.getDestBasePath()), '');
+      return fileDestPath.replace(path.resolve(plop.getDestBasePath()), '');
     } catch(err) {
       throw typeof err === 'string' ? err : err.message || JSON.stringify(err);
     }
   })
 
   plop.setActionType('update store-reduxor', (data, config) => {
-    const makeDestPath = p => nodePath.resolve(plop.getDestBasePath(), p);
+    const makeDestPath = p => path.resolve(plop.getDestBasePath(), p);
     const fileDestPath = makeDestPath(plop.renderString(config.path));
     try {
       let fileData = fs.readFileSync(fileDestPath, 'utf-8');
@@ -120,11 +120,12 @@ module.exports = function (plop) {
         .replace(/(\/\/ -- IMPORT SERVICES --)/, plop.renderString(importFile, data))
         .replace(/(\/\/ -- PROVIDERS --)/, plop.renderString(provider, data))
       fs.writeFileSync(fileDestPath, fileData);
-      return fileDestPath.replace(nodePath.resolve(plop.getDestBasePath()), '');
+      return fileDestPath.replace(path.resolve(plop.getDestBasePath()), '');
     } catch(err) {
       throw typeof err === 'string' ? err : err.message || JSON.stringify(err);
     }
   })
   
   createGenerator(plop);
+  
 };
