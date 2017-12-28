@@ -22,7 +22,6 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "lodash.camelcase": "^4.3.0",
-    "lodash.get": "^4.4.2",
     "plop": "^1.8.0"
   }
 }
