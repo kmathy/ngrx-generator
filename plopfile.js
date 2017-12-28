@@ -60,7 +60,7 @@ module.exports = function (plop) {
       console.log(`The config file has been created.`.green)
       options = fs.readJsonSync('./ngx-reduxor.config.json', 'utf-8')
     } catch(err) {
-      console.log(`err`.red);
+      console.log(`${err}`.red);
       process.exit(1);
     }
   } else {
