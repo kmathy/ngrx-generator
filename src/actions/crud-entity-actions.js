@@ -5,7 +5,7 @@ module.exports = {
     action: [{
       type: 'add',
       path: '{{ basePath }}/{{ folder name "actions" }}/{{kebabCase name}}.actions.ts',
-      templateFile: './templates/basic/_actions.ts'
+      templateFile: './templates/CRUD-entity/_actions.ts'
     }],
       
     /*
@@ -14,12 +14,12 @@ module.exports = {
     reducer: [{
         type: 'add',
         path: '{{ basePath }}/{{ folder name "reducers" }}/{{kebabCase name}}.reducer.ts',
-        templateFile: './templates/basic/_reducer.ts'
+        templateFile: './templates/CRUD-entity/_reducer.ts'
       },
       {
         type: 'add',
         path: '{{ basePath }}/{{ folder name "reducers"}}/{{kebabCase name}}.reducer.spec.ts',
-        templateFile: './templates/basic/_reducer.spec.ts'
+        templateFile: './templates/CRUD-entity/_reducer.spec.ts'
       }
     ],
       
@@ -29,11 +29,11 @@ module.exports = {
     effect: [{
       type: 'add',
       path: '{{ basePath }}/{{ folder name "effects" }}/{{kebabCase name}}.effects.ts',
-      templateFile: './templates/basic/_effect.ts'
+      templateFile: './templates/CRUD-entity/_effect.ts'
     }, {
       type: 'add',
       path: '{{ basePath }}/{{ folder name "effects" }}/{{kebabCase name}}.effects.spec.ts',
-      templateFile: './templates/basic/_effects.spec.ts'
+      templateFile: './templates/CRUD-entity/_effects.spec.ts'
     }],
       
     /*
@@ -42,10 +42,11 @@ module.exports = {
     service: [{
       type: 'add',
       path: '{{ basePath }}/{{ folder name "services" }}/{{kebabCase name}}.service.ts',
-      templateFile: './templates/basic/_service.ts'
+      templateFile: './templates/CRUD-entity/_service.ts'
     }, {
       type: 'add',
       path: '{{ basePath }}/{{ folder name "services" }}/{{kebabCase name}}.service.spec.ts',
-      templateFile: './templates/basic/_service.spec.ts'
+      templateFile: './templates/CRUD-entity/_service.spec.ts'
     }]
   }
+  

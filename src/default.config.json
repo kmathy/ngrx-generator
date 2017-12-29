@@ -1,4 +1,5 @@
 {
     "BASE_PATH": "./src/store",
-    "SEPARATE_DIRECTORY": false
+    "SEPARATE_DIRECTORY": false,
+    "HAS_ROUTER_SERIALIZER": false
 }

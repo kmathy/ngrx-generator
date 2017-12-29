@@ -1,6 +1,6 @@
 import * as {{ camelCase name }} from '{{position "actions"}}/{{ kebabCase name }}.actions';
 
-export interface State {
+export interface {{ titleCase name }}State {
   loading: boolean;
   entities: { [id: string]: any };
   result: string[];
@@ -8,7 +8,7 @@ export interface State {
   type: string;
 };
 
-export const initialState: State = {
+export const initialState: {{ titleCase name }}State = {
   loading: false,
   entities: {},
   result: [],
@@ -16,7 +16,7 @@ export const initialState: State = {
   type: ''
 };
 
-export function reducer(state = initialState, action: {{ camelCase name }}.Actions): State {
+export function reducer(state = initialState, action: {{ camelCase name }}.Actions): {{ titleCase name }}State {
   switch (action.type) {
     case {{ camelCase name }}.LOAD_{{ constantCase name }}: {
       return {

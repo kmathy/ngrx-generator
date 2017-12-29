@@ -14,14 +14,14 @@ import {
  */
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import {environment} from 'environments/environment';
+import { environment } from 'environments/environment';
 
 // -- IMPORT REDUCER --
 import * as {{ camelCase name }} from './{{ folder name 'reducers' }}/{{ kebabCase name }}.reducer';
 
 export interface State {
     // -- IMPORT STATE --
-    {{ camelCase name }}: {{ camelCase name }}.State;
+    {{ camelCase name }}: {{ camelCase name }}.{{ titleCase name }}State;
 }
 
 export const reducers: ActionReducerMap<State> = {

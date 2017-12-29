@@ -9,13 +9,13 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class {{ properCase name }}Effects {
-  @Effect() load$;
+  @Effect() load{{ titleCase name }}$;
   
   constructor(
     private {{ camelCase name }}Service: {{ properCase name }}Service,
     private actions$: Actions
   ) {
-    this.load$ = this.actions$
+    this.load{{ titleCase name }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.LOAD_{{ constantCase name }})
       .switchMap((state: {{ camelCase name }}Actions.Load{{ titleCase name }}Action) => this.{{ camelCase name }}Service.load{{ titleCase name }}()
         // If successful, dispatch success action with result
