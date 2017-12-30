@@ -1,4 +1,6 @@
-# ngx-reduxor: save time by generating ngrx architecture with no effort!
+<p align="center">
+<img width="400" src="https://github.com/kmathy/ngx-reduxor/blob/master/Ngx-reduxor.png" alt="Logo">
+</p>
 
 ## Intro
 If you are a user of @ngrx libs, check this generator! This will help you to save time by creating an architecture for your ngrx files. 
