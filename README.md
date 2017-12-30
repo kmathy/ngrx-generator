@@ -21,6 +21,8 @@ Now, it has the following features:
 ```
 @ngrx/store@^4.0.0
 @ngrx/effects@^4.0.0
+@ngrx/entity@^4.0.0
+ngrx-store-freeze
 ```
 
 ## Getting Started
@@ -79,6 +81,10 @@ imports: [
 ```shell
 npm run ngx-reduxor
 ```
+
+## Note when generating an Entity
+
+* Take note that the new store object name must be `singular`.
 
 And then, follow the instructions... ;-)
 Congratulations! You are now able to create huge and scalable app in Redux inside your Angular applications!
