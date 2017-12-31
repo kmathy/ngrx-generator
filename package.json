@@ -17,7 +17,9 @@
   "peerDependencies": {
     "@ngrx/effects": "^4.1.1",
     "@ngrx/store": "^4.1.1",
-    "@ngrx/store-devtools": "^4.1.1"
+    "@ngrx/store-devtools": "^4.1.1",
+    "@ngrx/entity": "^4.1.1",
+    "ngrx-store-freeze": "^0.2.0"
   },
   "dependencies": {
     "fs-extra": "^5.0.0",
