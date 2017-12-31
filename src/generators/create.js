@@ -34,20 +34,23 @@ module.exports = function(options) {
                 type: 'list',
                 name: 'entity',
                 message: 'Is this a collection using ngrx/entity?',
+                when: function(answers) {
+                    return answers.store === 'CRUD'
+                },
                 choices: ['Yes', 'No']
             }
         ],
         actions: (data) => {
             let actions = [];
-            
-            if ( data.store === 'CRUD' && data.entity === 'Yes' ) {
-                actions = actions.concat(crudEntityActions.action, crudEntityActions.reducer, crudEntityActions.effect, crudEntityActions.service);
-            } else if ( data.store === 'CRUD' && data.entity === 'No' ) {
-                actions = actions.concat(crudActions.action, crudActions.reducer, crudActions.effect, crudActions.service);
-            } else if ( data.store === 'Basic' && data.entity === 'No') {
+            if(data.store === 'Basic') {
                 actions = actions.concat(basicActions.action, basicActions.reducer, basicActions.effect, basicActions.service);
+            } else { // CRUD
+                if (data.entity === 'Yes') {
+                    actions = actions.concat(crudEntityActions.action, crudEntityActions.reducer, crudEntityActions.effect, crudEntityActions.service);
+                } else {
+                    actions = actions.concat(crudActions.action, crudActions.reducer, crudActions.effect, crudActions.service);
+                }
             }
-
             const indexExists = fs.existsSync(options.BASE_PATH, 'app.store.ts');
             const allEffectsExists = fs.existsSync(options.BASE_PATH, 'all-effects.ts');
             const storeReduxorModuleExists = fs.existsSync(options.BASE_PATH, 'store-reduxor.module.ts');
