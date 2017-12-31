@@ -1,31 +1,31 @@
 import { Action } from '@ngrx/store';
 
-export const LOAD =                 '[Basic] Load';
-export const LOAD_SUCCESS =         '[Basic] Load Success';
-export const LOAD_FAIL =            '[Basic] Load Fail';
+export const LOAD_BASIC =                 '[Basic] Load Basic';
+export const LOAD_BASIC_SUCCESS =         '[Basic] Load Basic Success';
+export const LOAD_BASIC_FAIL =            '[Basic] Load Basic Fail';
 
 /**
  * Load Basic Actions
  */
-export class LoadAction implements Action {
-  readonly type = LOAD;
+export class LoadBasicAction implements Action {
+  readonly type = LOAD_BASIC;
 
   constructor(public paylaod: any) { }
 }
 
-export class LoadSuccessAction implements Action {
-  readonly type = LOAD_SUCCESS;
+export class LoadBasicSuccessAction implements Action {
+  readonly type = LOAD_BASIC_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class LoadFailAction implements Action {
-  readonly type = LOAD_FAIL;
+export class LoadBasicFailAction implements Action {
+  readonly type = LOAD_BASIC_FAIL;
 
   constructor(public error: Error) { }
 }
 
 export type Actions =
-  | LoadAction
-  | LoadSuccessAction
-  | LoadFailAction;
+  | LoadBasicAction
+  | LoadBasicSuccessAction
+  | LoadBasicFailAction;

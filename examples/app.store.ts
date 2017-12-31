@@ -1,22 +1,36 @@
 import {
     ActionReducerMap,
     ActionReducer,
-    MetaReducer
+    MetaReducer,
+    createSelector,
+    createFeatureSelector,
 } from '@ngrx/store';
-import {environment} from 'environments/environment';
+// import * as fromRouter from '@ngrx/router-store'; // in case you need it
+
+/**
+ * storeFreeze prevents state from being mutated. When mutation occurs, an
+ * exception will be thrown. This is useful during development mode to
+ * ensure that none of the reducers accidentally mutates the state.
+ */
+import { storeFreeze } from 'ngrx-store-freeze';
+
+import { environment } from 'environments/environment';
 
 // -- IMPORT REDUCER --
+import * as user from './crud-entity/user.reducer';
 import * as crud from './crud/crud.reducer';
 import * as basic from './basic/basic.reducer';
 
 export interface State {
     // -- IMPORT STATE --
-	crud: crud.State;
-    basic: basic.State;
+	user: user.UserState;
+	crud: crud.CrudState;
+    basic: basic.BasicState;
 }
 
 export const reducers: ActionReducerMap<State> = {
     // -- ADD REDUCER --
+	user: user.reducer,
 	crud: crud.reducer,
     basic: basic.reducer
 };
@@ -35,5 +49,5 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 }
 
 export const metaReducers: MetaReducer<State>[] = !environment.production
-    ? [logger]
+    ? [logger, storeFreeze]
     : [];

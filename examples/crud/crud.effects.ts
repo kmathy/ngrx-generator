@@ -20,33 +20,33 @@ export class CrudEffects {
     private actions$: Actions
   ) {
     this.get$ = this.actions$
-      .ofType(crudActions.GET)
-      .switchMap((state: crudActions.GetAction) => this.crudService.get()
+      .ofType(crudActions.GET_CRUD)
+      .switchMap((state: crudActions.GetCrudAction) => this.crudService.getCrud()
         // If successful, dispatch success action with result
-        .map(res => new crudActions.GetSuccessAction(res))
+        .map(res => new crudActions.GetCrudSuccessAction(res))
         // If request fails, dispatch failed action
-        .catch((err: HttpErrorResponse) => Observable.of(new crudActions.GetFailAction(err)))
+        .catch((err: HttpErrorResponse) => Observable.of(new crudActions.GetCrudFailAction(err)))
       );
 
     this.create$ = this.actions$
-      .ofType(crudActions.CREATE)
-      .switchMap((state: crudActions.CreateAction) => this.crudService.create(state.payload)
-        .map(res => new crudActions.CreateSuccessAction(res))
-        .catch((err: HttpErrorResponse) => Observable.of(new crudActions.CreateFailAction(err)))
+      .ofType(crudActions.CREATE_CRUD)
+      .switchMap((state: crudActions.CreateCrudAction) => this.crudService.createCrud(state.payload)
+        .map(res => new crudActions.CreateCrudSuccessAction(res))
+        .catch((err: HttpErrorResponse) => Observable.of(new crudActions.CreateCrudFailAction(err)))
       );
 
     this.update$ = this.actions$
-      .ofType(crudActions.UPDATE)
-      .switchMap((state: crudActions.UpdateAction) => this.crudService.update(state.payload)
-        .map(res => new crudActions.UpdateSuccessAction(res))
-        .catch((err: HttpErrorResponse) => Observable.of(new crudActions.UpdateFailAction(err)))
+      .ofType(crudActions.UPDATE_CRUD)
+      .switchMap((state: crudActions.UpdateCrudAction) => this.crudService.updateCrud(state.payload)
+        .map(res => new crudActions.UpdateCrudSuccessAction(res))
+        .catch((err: HttpErrorResponse) => Observable.of(new crudActions.UpdateCrudFailAction(err)))
       );
 
     this.delete$ = this.actions$
-      .ofType(crudActions.DELETE)
-      .switchMap((state: crudActions.DeleteAction) => this.crudService.delete(state.payload)
-        .map(res => new crudActions.DeleteSuccessAction(res))
-        .catch((err: HttpErrorResponse) => Observable.of(new crudActions.DeleteFailAction(err)))
+      .ofType(crudActions.DELETE_CRUD)
+      .switchMap((state: crudActions.DeleteCrudAction) => this.crudService.deleteCrud(state.payload)
+        .map(res => new crudActions.DeleteCrudSuccessAction(res))
+        .catch((err: HttpErrorResponse) => Observable.of(new crudActions.DeleteCrudFailAction(err)))
       );
   }
 

@@ -1,24 +1,24 @@
 import * as basic from './basic.actions';
 
-export interface State {
+export interface BasicState {
   loading: boolean;
   entities: { [id: string]: any };
   result: string[];
   error: Error;
   type: string;
-}
+};
 
-export const initialState: State = {
+export const initialState: BasicState = {
   loading: false,
   entities: {},
   result: [],
   error: null,
   type: ''
-}
+};
 
-export function reducer(state = initialState, action: basic.Actions): State {
+export function reducer(state = initialState, action: basic.Actions): BasicState {
   switch (action.type) {
-    case basic.LOAD: {
+    case basic.LOAD_BASIC: {
       return {
         ...state,
         loading: true,
@@ -27,7 +27,7 @@ export function reducer(state = initialState, action: basic.Actions): State {
       }
     }
 
-    case basic.LOAD_SUCCESS: {
+    case basic.LOAD_BASIC_SUCCESS: {
       state.result = action.payload;
       return {
         ...state,
@@ -37,7 +37,7 @@ export function reducer(state = initialState, action: basic.Actions): State {
       };
     }
 
-    case basic.LOAD_FAIL: {
+    case basic.LOAD_BASIC_FAIL: {
       return {
         ...state,
         loading: false,

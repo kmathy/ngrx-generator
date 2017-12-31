@@ -1,39 +1,45 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export const GET =                 '[Crud] Get';
-export const GET_SUCCESS =         '[Crud] Get Success';
-export const GET_FAIL =            '[Crud] Get Fail';
+/**
+ * Generate constants based on the given name
+ * e.g export const GET_AUTH = '[Auth] Get Auth'
+ */
 
-export const CREATE =              '[Crud] Create';
-export const CREATE_SUCCESS =      '[Crud] Create Success';
-export const CREATE_FAIL =         '[Crud] Create Fail';
+export const GET_CRUD =                 '[Crud] Get Crud';
+export const GET_CRUD_SUCCESS =         '[Crud] Get Crud Success';
+export const GET_CRUD_FAIL =            '[Crud] Get Crud Fail';
 
-export const UPDATE =              '[Crud] Update';
-export const UPDATE_SUCCESS =      '[Crud] Update Success';
-export const UPDATE_FAIL =         '[Crud] Update Fail';
+export const CREATE_CRUD =              '[Crud] Create Crud';
+export const CREATE_CRUD_SUCCESS =      '[Crud] Create Crud Success';
+export const CREATE_CRUD_FAIL =         '[Crud] Create Crud Fail';
 
-export const DELETE =              '[Crud] Delete';
-export const DELETE_SUCCESS =      '[Crud] Delete Success';
-export const DELETE_FAIL =         '[Crud] Delete Fail';
+export const UPDATE_CRUD =              '[Crud] Update Crud';
+export const UPDATE_CRUD_SUCCESS =      '[Crud] Update Crud Success';
+export const UPDATE_CRUD_FAIL =         '[Crud] Update Crud Fail';
+
+export const DELETE_CRUD =              '[Crud] Delete Crud';
+export const DELETE_CRUD_SUCCESS =      '[Crud] Delete Crud Success';
+export const DELETE_CRUD_FAIL =         '[Crud] Delete Crud Fail';
 
 /**
  * Get Crud Actions
+ * e.g GetAuthAction
  */
-export class GetAction implements Action {
-  readonly type = GET;
+export class GetCrudAction implements Action {
+  readonly type = GET_CRUD;
 
   constructor(public payload: any) { }
 }
 
-export class GetSuccessAction implements Action {
-  readonly type = GET_SUCCESS;
+export class GetCrudSuccessAction implements Action {
+  readonly type = GET_CRUD_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class GetFailAction implements Action {
-  readonly type = GET_FAIL;
+export class GetCrudFailAction implements Action {
+  readonly type = GET_CRUD_FAIL;
 
   constructor(public error: HttpErrorResponse) { }
 }
@@ -41,20 +47,20 @@ export class GetFailAction implements Action {
 /**
  * Create Crud Actions
  */
-export class CreateAction implements Action {
-  readonly type = CREATE;
+export class CreateCrudAction implements Action {
+  readonly type = CREATE_CRUD;
 
   constructor(public payload: any) { }
 }
 
-export class CreateSuccessAction implements Action {
-  readonly type = CREATE_SUCCESS;
+export class CreateCrudSuccessAction implements Action {
+  readonly type = CREATE_CRUD_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class CreateFailAction implements Action {
-  readonly type = CREATE_FAIL;
+export class CreateCrudFailAction implements Action {
+  readonly type = CREATE_CRUD_FAIL;
 
   constructor(public error: HttpErrorResponse) { }
 }
@@ -62,20 +68,20 @@ export class CreateFailAction implements Action {
 /**
  * Update Crud Actions
  */
-export class UpdateAction implements Action {
-  readonly type = UPDATE;
+export class UpdateCrudAction implements Action {
+  readonly type = UPDATE_CRUD;
 
   constructor(public payload: any) { }
 }
 
-export class UpdateSuccessAction implements Action {
-  readonly type = UPDATE_SUCCESS;
+export class UpdateCrudSuccessAction implements Action {
+  readonly type = UPDATE_CRUD_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class UpdateFailAction implements Action {
-  readonly type = UPDATE_FAIL;
+export class UpdateCrudFailAction implements Action {
+  readonly type = UPDATE_CRUD_FAIL;
 
   constructor(public error: HttpErrorResponse) { }
 }
@@ -83,34 +89,34 @@ export class UpdateFailAction implements Action {
 /**
  * Delete Crud Actions
  */
-export class DeleteAction implements Action {
-  readonly type = DELETE;
+export class DeleteCrudAction implements Action {
+  readonly type = DELETE_CRUD;
 
   constructor(public payload: any) { }
 }
 
-export class DeleteSuccessAction implements Action {
-  readonly type = DELETE_SUCCESS;
+export class DeleteCrudSuccessAction implements Action {
+  readonly type = DELETE_CRUD_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class DeleteFailAction implements Action {
-  readonly type = DELETE_FAIL;
+export class DeleteCrudFailAction implements Action {
+  readonly type = DELETE_CRUD_FAIL;
 
   constructor(public error: HttpErrorResponse) { }
 }
 
 export type Actions =
-  | GetAction
-  | GetSuccessAction
-  | GetFailAction
-  | CreateAction
-  | CreateFailAction
-  | CreateSuccessAction
-  | UpdateAction
-  | UpdateSuccessAction
-  | UpdateFailAction
-  | DeleteAction
-  | DeleteSuccessAction
-  | DeleteFailAction;
+  | GetCrudAction
+  | GetCrudSuccessAction
+  | GetCrudFailAction
+  | CreateCrudAction
+  | CreateCrudFailAction
+  | CreateCrudSuccessAction
+  | UpdateCrudAction
+  | UpdateCrudSuccessAction
+  | UpdateCrudFailAction
+  | DeleteCrudAction
+  | DeleteCrudSuccessAction
+  | DeleteCrudFailAction;

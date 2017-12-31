@@ -26,11 +26,11 @@ describe('CrudEffects', () => {
 
   describe('crud$', () => {
 
-    it('should return a LOAD_SUCCESS action, on success', function () {
+    it('should return a LOAD_CRUD_SUCCESS action, on success', function () {
 
     });
 
-    it('should return a LOAD_FAIL action, on error', function () {
+    it('should return a LOAD_CRUD_FAIL action, on error', function () {
 
     });
 

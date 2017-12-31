@@ -7,7 +7,7 @@ export class BasicService {
 
   constructor(private http: HttpClient) { }
 
-  load(): Observable<any> {
+  loadBasic(): Observable<any> {
     return this.http.get('https://api.com');
   }
 }

@@ -26,11 +26,11 @@ describe('BasicEffects', () => {
 
   describe('basic$', () => {
 
-    it('should return a LOAD_SUCCESS action, on success', function () {
+    it('should return a LOAD_BASIC_SUCCESS action, on success', function () {
 
     });
 
-    it('should return a LOAD_FAIL action, on error', function () {
+    it('should return a LOAD_BASIC_FAIL action, on error', function () {
 
     });
 

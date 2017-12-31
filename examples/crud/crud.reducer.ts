@@ -1,25 +1,25 @@
 import * as crud from './crud.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export interface State {
+export interface CrudState {
   loading: boolean;
   entities: { [id: string]: any };
   result: string[];
   error: HttpErrorResponse;
   type: string;
-}
+};
 
-export const initialState: State = {
+export const initialState: CrudState = {
   loading: false,
   entities: {},
   result: [],
   error: null,
   type: ''
-}
+};
 
-export function reducer(state = initialState, action: crud.Actions): State {
+export function reducer(state = initialState, action: crud.Actions): CrudState {
   switch (action.type) {
-    case crud.GET: {
+    case crud.GET_CRUD: {
       return {
         ...state,
         loading: true,
@@ -28,7 +28,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       }
     }
 
-    case crud.GET_SUCCESS: {
+    case crud.GET_CRUD_SUCCESS: {
       state.result = action.payload;
       return {
         ...state,
@@ -38,7 +38,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       };
     }
 
-    case crud.GET_FAIL: {
+    case crud.GET_CRUD_FAIL: {
       return {
         ...state,
         loading: false,
@@ -47,7 +47,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       };
     }
 
-    case crud.CREATE: {
+    case crud.CREATE_CRUD: {
       return {
         ...state,
         loading: true,
@@ -56,7 +56,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       }
     }
 
-    case crud.CREATE_SUCCESS: {
+    case crud.CREATE_CRUD_SUCCESS: {
       state.result = [...state.result, action.payload];
       return {
         ...state,
@@ -66,7 +66,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       };
     }
 
-    case crud.CREATE_FAIL: {
+    case crud.CREATE_CRUD_FAIL: {
       return {
         ...state,
         loading: false,
@@ -75,7 +75,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       };
     }
 
-    case crud.UPDATE: {
+    case crud.UPDATE_CRUD: {
       return {
         ...state,
         loading: true,
@@ -84,7 +84,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       }
     }
 
-    case crud.UPDATE_SUCCESS: {
+    case crud.UPDATE_CRUD_SUCCESS: {
       return {
         ...state,
         loading: false,
@@ -93,7 +93,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       };
     }
 
-    case crud.UPDATE_FAIL: {
+    case crud.UPDATE_CRUD_FAIL: {
       return {
         ...state,
         loading: false,
@@ -102,7 +102,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       };
     }
 
-    case crud.DELETE: {
+    case crud.DELETE_CRUD: {
       return {
         ...state,
         loading: true,
@@ -111,7 +111,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       }
     }
 
-    case crud.DELETE_SUCCESS: {
+    case crud.DELETE_CRUD_SUCCESS: {
       state.result.splice(state.result.findIndex(action.payload), 1);
       return {
         ...state,
@@ -121,7 +121,7 @@ export function reducer(state = initialState, action: crud.Actions): State {
       };
     }
 
-    case crud.DELETE_FAIL: {
+    case crud.DELETE_CRUD_FAIL: {
       return {
         ...state,
         loading: false,
