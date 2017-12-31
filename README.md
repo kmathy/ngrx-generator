@@ -83,6 +83,14 @@ ngx-reduxor
 And then, follow the instructions... ;-)
 Congratulations! You are now able to create huge and scalable app in Redux inside your Angular applications!
 
+## Contributors
+
+Special thanks to contributors for their hard work!!
+
+<a href="https://github.com/lexcaraig">
+  <img src="https://avatars1.githubusercontent.com/u/15936424?s=75&v=4">
+</a>
+
 ## Issues/Improvements
 Don't hesitate to send a PR or to contribute to this project. If you have suggestion or a problem, feel free to open an issue.
 
