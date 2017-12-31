@@ -2,6 +2,8 @@
 <img width="400" src="https://github.com/kmathy/ngx-reduxor/blob/master/Ngx-reduxor.png" alt="Logo">
 </p>
 
+## [For Version 1, check this readme.md](https://github.com/kmathy/ngx-reduxor/blob/master/README_v1.md)
+
 ## Intro
 If you are a user of @ngrx libs, check this generator! This will help you to save time by creating an architecture for your ngrx files. 
 
