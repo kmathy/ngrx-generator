@@ -5,15 +5,11 @@
 ## Intro
 If you are a user of @ngrx libs, check this generator! This will help you to save time by creating an architecture for your ngrx files. 
 
-Initially created by @NetanelBasal (called ngrx-generator). After some times, 
-and using the recommendations of the community, the generator has been improved.
-
-Now, it has the following features:
 * Create Actions, reducers, effects and services in one command! Just provide a name and the generator will do the rest.
 * Provide a module to easily import all the reducers, effects and services in your Angular app.
 * Naming convention to prevent errors.
 * MetaReducer: non-invasive logger in development.
-* Generator available: CRUD actions, Basic actions.
+* Generator available: CRUD actions, CRUD advanced actions using Entity, Basic actions.
 * Mainly inspired by the [ngrx styleguide](https://github.com/orizens/ngrx-styleguide)
 * Use the latest Angular HttpClient.
 * Provide unit tests.
@@ -49,20 +45,14 @@ in your package.json, add the following:
   "scripts": {
     "ngx-reduxor": "ngx-reduxor"
   },
-  ...
-  "ngxReduxor": {
-    "basePath": "./src/app/store", // For example, you can set it everywhere
-    "separateDirectory": false // Or true if you want a directory for each actions, effects, reducers,...
-  }
-  ...
 ```
 
-## Import to your Angular app
-The first time you launch the generator, it creates a module called StoreReduxorModule.
-This module regroups all the reducers, effects and provided services created.
-There is also an index file containing the list of all reducers and you can also use this file to create some metaReducer,
-like a logger (for debugging purpose). 
-After that, in your AppModule, you just need to import the module and it will expose the store in your app.
+So that, you can directly use the Generator like the Angular CLI.<br>
+The first time you launch the generator, it will create a new file for the configuration.
+
+## Import to your Angular application
+A module is created once you generate your first ngrx files. This module contains all the necessary: Reducers, interfaces, meta-reducers, effects,...
+You just need to import the module inside the AppModule and it will expose the store in your application.
 
 ```
 ...
@@ -81,7 +71,7 @@ imports: [
 ## Usage
 
 ```shell
-npm run ngx-reduxor
+ngx-reduxor
 ```
 
 ## Note when generating an Entity
