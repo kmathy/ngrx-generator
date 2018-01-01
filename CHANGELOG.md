@@ -1,3 +1,7 @@
+## 2.0.2 (01/01/2018)
+**Fix:**: remove unused option
+**Fix:**: make StoreDevtoolModule optional
+
 # 2.0.0 (31/12/2017)
 ## BREAKING CHANGES
 **Config:** Config file added.
