@@ -85,7 +85,7 @@ Congratulations! You are now able to create huge and scalable app in Redux insid
 
 ## Contributors
 
-Special thanks to contributors for their hard work!!
+Special thanks to contributors for their hard work!! 🙏 Do you want to contribute? Check the [Contributor Guide](https://github.com/kmathy/ngx-reduxor/blob/master/CONTRIBUTOR_GUIDE.md)
 
 <a href="https://github.com/lexcaraig">
   <img src="https://avatars1.githubusercontent.com/u/15936424?s=75&v=4">
