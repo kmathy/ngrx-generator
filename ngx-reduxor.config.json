@@ -1,5 +1,4 @@
 {
 	"BASE_PATH": "./examples",
-	"SEPARATE_DIRECTORY": false,
-	"HAS_ROUTER_SERIALIZER": false
+	"SEPARATE_DIRECTORY": false
 }
