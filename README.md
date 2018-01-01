@@ -2,6 +2,8 @@
 <img width="400" src="https://github.com/kmathy/ngx-reduxor/blob/master/Ngx-reduxor.png" alt="Logo">
 </p>
 
+## [For Version 1, check this readme.md](https://github.com/kmathy/ngx-reduxor/blob/master/README_v1.md)
+
 ## Intro
 If you are a user of @ngrx libs, check this generator! This will help you to save time by creating an architecture for your ngrx files. 
 
@@ -80,6 +82,14 @@ ngx-reduxor
 
 And then, follow the instructions... ;-)
 Congratulations! You are now able to create huge and scalable app in Redux inside your Angular applications!
+
+## Contributors
+
+Special thanks to contributors for their hard work!! 🙏 Do you want to contribute? Check the [Contributor Guide](https://github.com/kmathy/ngx-reduxor/blob/master/CONTRIBUTOR_GUIDE.md)
+
+<a href="https://github.com/lexcaraig">
+  <img src="https://avatars1.githubusercontent.com/u/15936424?s=75&v=4">
+</a>
 
 ## Issues/Improvements
 Don't hesitate to send a PR or to contribute to this project. If you have suggestion or a problem, feel free to open an issue.
