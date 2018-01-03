@@ -52,6 +52,12 @@ in your package.json, add the following:
 So that, you can directly use the Generator like the Angular CLI.<br>
 The first time you launch the generator, it will create a new file for the configuration.
 
+## Usage
+
+```shell
+ngx-reduxor
+```
+
 ## Import to your Angular application
 A module is created once you generate your first ngrx files. This module contains all the necessary: Reducers, interfaces, meta-reducers, effects,...
 You just need to import the module inside the AppModule and it will expose the store in your application.
@@ -68,12 +74,6 @@ imports: [
   ...
 ]
 ...
-```
-
-## Usage
-
-```shell
-ngx-reduxor
 ```
 
 ## Note when generating an Entity
