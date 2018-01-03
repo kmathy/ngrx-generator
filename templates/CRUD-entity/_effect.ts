@@ -7,6 +7,7 @@ import * as {{ camelCase name }}Actions from '{{position "actions"}}/{{ kebabCas
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class {{ properCase name }}Effects {
@@ -18,7 +19,7 @@ export class {{ properCase name }}Effects {
   @Effect() delete{{ titleCase name }}$;
   @Effect() delete{{ titleCase name }}s$;
   @Effect() clear{{ titleCase name }}s$;
-  
+
   constructor(
     private {{ camelCase name }}Service: {{ properCase name }}Service,
     private actions$: Actions
