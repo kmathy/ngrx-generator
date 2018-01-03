@@ -26,7 +26,18 @@ ngrx-store-freeze
 ```
 
 ## Getting Started
+### Globally
+Install it via npm:
 
+```shell
+npm install -g ngx-reduxor
+```
+
+or with Yarn:
+```shell
+yarn add --dev ngx-reduxor
+```
+### Locally in a project
 Install it via npm:
 
 ```shell
@@ -40,7 +51,7 @@ yarn add --dev ngx-reduxor
 
 ## Configuration
 
-in your package.json, add the following:
+If you want to install it locally, you have to add the following in your package.json:
 
 ```
   ...
@@ -49,13 +60,20 @@ in your package.json, add the following:
   },
 ```
 
-So that, you can directly use the Generator like the Angular CLI.<br>
+If installed globally, you can directly use the Generator like the Angular CLI.<br>
 The first time you launch the generator, it will create a new file for the configuration.
 
 ## Usage
+You need to use the generator at the root of your project.
 
+If installed globally:
 ```shell
 ngx-reduxor
+```
+
+Otherwise:
+```
+npm run ngx-reduxor
 ```
 
 ## Import to your Angular application
