@@ -14,10 +14,15 @@
   "bin": {
     "ngx-reduxor": "index.js"
   },
+  "scripts": {
+    "release":"release-it"
+  },
   "peerDependencies": {
     "@ngrx/effects": "^4.1.1",
     "@ngrx/entity": "^4.1.1",
-    "@ngrx/store": "^4.1.1",
+    "@ngrx/store": "^4.1.1"
+  },
+  "optionalDependencies": {
     "@ngrx/store-devtools": "^4.1.1",
     "ngrx-store-freeze": "^0.2.0"
   },
@@ -25,5 +30,8 @@
     "fs-extra": "^5.0.0",
     "lodash.camelcase": "^4.3.0",
     "plop": "^1.8.0"
+  },
+  "devDependencies": {
+    "release-it": "^6.2.0"
   }
 }
