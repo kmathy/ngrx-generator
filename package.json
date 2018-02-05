@@ -14,6 +14,10 @@
   "bin": {
     "ngx-reduxor": "index.js"
   },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/kmathy/ngx-reduxor"
+  },
   "scripts": {
     "release":"release-it"
   },
