@@ -15,7 +15,7 @@
     "ngx-reduxor": "index.js"
   },
   "repository": {
-    "type": "github",
+    "type": "git",
     "url": "https://github.com/kmathy/ngx-reduxor"
   },
   "scripts": {
