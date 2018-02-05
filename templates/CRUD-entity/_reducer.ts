@@ -38,14 +38,14 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
         loading: true,
       };
 
-    case {{ camelCase name }}.LOAD_{{ constantCase name }}S_SUCCESS: 
+    case {{ camelCase name }}.LOAD_{{ constantCase name }}S_SUCCESS:
       return {
         ...state,
         loading: false,
         successMessage: 'Loading of {{ titleCase name }} has been successful!'
       };
 
-    case {{ camelCase name }}.LOAD_{{ constantCase name }}S_FAIL: 
+    case {{ camelCase name }}.LOAD_{{ constantCase name }}S_FAIL:
       return {
         ...state,
         loading: false,
@@ -63,7 +63,7 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
         ...state,
         loading: false,
         successMessage: 'Loading of {{ titleCase name }} has been successful!'
-      }; 
+      };
 
     case {{ camelCase name }}.ADD_{{ constantCase name }}_FAIL:
       return {
@@ -115,7 +115,7 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
     case {{ camelCase name }}.UPDATE_{{ constantCase name }}S:
       return {
         ...{{ camelCase name }}Adapter.updateMany(action.payload.ids, state),
-        loading: true 
+        loading: true
       };
 
     case {{ camelCase name }}.UPDATE_{{ constantCase name }}S_SUCCESS:
@@ -145,7 +145,7 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
         successMessage: 'Loading of {{ titleCase name }} has been successful!'
       };
 
-    case {{ camelCase name }}.DELETE_{{ constantCase name }}_FAIL: 
+    case {{ camelCase name }}.DELETE_{{ constantCase name }}_FAIL:
       return {
         ...state,
         loading: false,
@@ -165,7 +165,7 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
         successMessage: 'Loading of {{ titleCase name }} has been successful!'
       };
 
-    case {{ camelCase name }}.DELETE_{{ constantCase name }}S_FAIL: 
+    case {{ camelCase name }}.DELETE_{{ constantCase name }}S_FAIL:
       return {
         ...state,
         loading: false,
@@ -198,7 +198,7 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
   }
 }
 
-export const get{{ titleCase name }}State = createFeatureSelector<{{ titleCase name }}State>({{ camelCase name }});
+export const get{{ titleCase name }}State = createFeatureSelector<{{ titleCase name }}State>('{{ camelCase name }}');
 
 export const {
   selectIds,
