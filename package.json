@@ -1,6 +1,6 @@
 {
   "name": "ngx-reduxor",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Angular+Redux: templates generator to scaffold easily and with consistency, all in a simple command",
   "main": "index.js",
   "keywords": [
@@ -19,7 +19,7 @@
     "url": "https://github.com/kmathy/ngx-reduxor"
   },
   "scripts": {
-    "release":"release-it"
+    "release": "release-it"
   },
   "peerDependencies": {
     "@ngrx/effects": "^4.1.1",
