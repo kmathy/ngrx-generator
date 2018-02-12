@@ -1,9 +1,6 @@
-import "rxjs/add/observable/of";
-import "rxjs/add/observable/throw";
 import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { {{properCase name}}Effects } from "{{position "effects"}}/{{kebabCase name}}.effects";
 import { {{properCase name}}Service } from "{{position "services"}}/{{kebabCase name}}.service";
-import { Observable } from "rxjs/Observable";
 
 describe('{{properCase name}}Effects', () => {
   let runner, {{camelCase name}}Effects, {{camelCase name}}Service;

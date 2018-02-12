@@ -22,18 +22,17 @@
     "release": "release-it"
   },
   "peerDependencies": {
-    "@ngrx/effects": "^4.1.1",
-    "@ngrx/entity": "^4.1.1",
-    "@ngrx/store": "^4.1.1"
-  },
-  "optionalDependencies": {
-    "@ngrx/store-devtools": "^4.1.1",
-    "ngrx-store-freeze": "^0.2.0"
+    "rxjs": "^5.5.0",
+    "@ngrx/effects": "^5.0.1",
+    "@ngrx/entity": "^5.0.1",
+    "@ngrx/store": "^5.0.0",
+    "@ngrx/store-devtools": "^5.0.1",
+    "ngrx-store-freeze": "^0.2.1"
   },
   "dependencies": {
     "fs-extra": "^5.0.0",
     "lodash.camelcase": "^4.3.0",
-    "plop": "^1.8.0"
+    "plop": "^1.9.1"
   },
   "devDependencies": {
     "release-it": "^6.2.0"
