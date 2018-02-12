@@ -29,9 +29,9 @@ export function reducer(state = initialState, action: {{ camelCase name }}.Actio
     }
 
     case {{ camelCase name }}.GET_{{ constantCase name }}_SUCCESS: {
-      state.result = action.payload;
       return {
         ...state,
+        result: action.payload,
         loading: false,
         error: null,
         type: action.type
@@ -57,9 +57,10 @@ export function reducer(state = initialState, action: {{ camelCase name }}.Actio
     }
 
     case {{ camelCase name }}.CREATE_{{ constantCase name }}_SUCCESS: {
-      state.result = [...state.result, action.payload];
+      const result = [...state.result, action.payload];
       return {
         ...state,
+        result: result,
         loading: false,
         error: null,
         type: action.type
@@ -112,7 +113,6 @@ export function reducer(state = initialState, action: {{ camelCase name }}.Actio
     }
 
     case {{ camelCase name }}.DELETE_{{ constantCase name }}_SUCCESS: {
-      state.result.splice(state.result.findIndex(action.payload), 1);
       return {
         ...state,
         loading: false,

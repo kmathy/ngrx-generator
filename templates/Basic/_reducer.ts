@@ -28,9 +28,9 @@ export function reducer(state = initialState, action: {{ camelCase name }}.Actio
     }
 
     case {{ camelCase name }}.LOAD_{{ constantCase name }}_SUCCESS: {
-      state.result = action.payload;
       return {
         ...state,
+        result: action.payload,
         loading: false,
         error: null,
         type: action.type
