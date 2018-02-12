@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="https://img.shields.io/npm/dt/ngx-reduxor.svg">
+  <img src="https://img.shields.io/npm/v/ngx-reduxor.svg">
+</p>
+<p align="center">
 <img width="400" src="https://github.com/kmathy/ngx-reduxor/blob/master/Ngx-reduxor.png" alt="Logo">
 </p>
 
