@@ -18,14 +18,15 @@ If you are a user of @ngrx libs, check this generator! This will help you to sav
 * Generator available: CRUD actions, CRUD advanced actions using Entity, Basic actions.
 * Mainly inspired by the [ngrx styleguide](https://github.com/orizens/ngrx-styleguide)
 * Use the latest Angular HttpClient.
+* Use lettable operators in Rxjs.
 * Provide unit tests.
 
 ## prerequisites
 
 ```
-@ngrx/store@^4.0.0
-@ngrx/effects@^4.0.0
-@ngrx/entity@^4.0.0
+@ngrx/store@^5.0.0
+@ngrx/effects@^5.0.1
+@ngrx/entity@^5.0.1
 ngrx-store-freeze
 ```
 
