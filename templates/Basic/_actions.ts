@@ -10,7 +10,7 @@ export const LOAD_{{ constantCase name }}_FAIL =            '[{{ titleCase name 
 export class Load{{ titleCase name }}Action implements Action {
   readonly type = LOAD_{{ constantCase name }};
 
-  constructor(public paylaod: any) { }
+  constructor(public payload: any) { }
 }
 
 export class Load{{ titleCase name }}SuccessAction implements Action {
