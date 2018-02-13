@@ -3,8 +3,6 @@ const fs = require('fs-extra');
 // actions
 const basicActions = require('../actions/basic-actions');
 const crudActions = require('../actions/crud-actions');
-
-// actions with entity
 const crudEntityActions = require('../actions/crud-entity-actions');
 
 // modules
@@ -41,16 +39,15 @@ module.exports = function(options) {
             }
         ],
         actions: (data) => {
-            let actions = [];
-            if(data.store === 'Basic') {
-                actions = actions.concat(basicActions.action, basicActions.reducer, basicActions.effect, basicActions.service);
-            } else { // CRUD
-                if (data.entity === 'Yes') {
-                    actions = actions.concat(crudEntityActions.action, crudEntityActions.reducer, crudEntityActions.effect, crudEntityActions.service);
-                } else {
-                    actions = actions.concat(crudActions.action, crudActions.reducer, crudActions.effect, crudActions.service);
-                }
-            }
+            let actions = 
+            options.IGNORE_SPEC ?
+                data.store === 'Basic' ? [basicActions.action, basicActions.reducerWithoutSpec, basicActions.effectWithoutSpec, basicActions.serviceWithoutSpec]
+                : data.entity === 'Yes' ? [crudEntityActions.action, crudEntityActions.reducerWithoutSpec, crudEntityActions.effectWithoutSpec, crudEntityActions.serviceWithoutSpec]
+                : [crudActions.action, crudActions.reducerWithoutSpec, crudActions.effectWithoutSpec, crudActions.serviceWithoutSpec]
+            : data.store === 'Basic' ? [basicActions.action, basicActions.reducer, basicActions.effect, basicActions.service]
+            : data.entity === 'Yes' ? [crudEntityActions.action, crudEntityActions.reducer, crudEntityActions.effect, crudEntityActions.service]
+            : [crudActions.action, crudActions.reducer, crudActions.effect, crudActions.service]
+
             const indexExists = fs.existsSync(options.BASE_PATH, 'app.store.ts');
             const allEffectsExists = fs.existsSync(options.BASE_PATH, 'all-effects.ts');
             const storeReduxorModuleExists = fs.existsSync(options.BASE_PATH, 'store-reduxor.module.ts');
@@ -58,7 +55,8 @@ module.exports = function(options) {
             actions = allEffectsExists ? actions.concat(modulesActions.updateAllEffects) : actions.concat(modulesActions.addAllEffects);
             actions = storeReduxorModuleExists ? actions.concat(modulesActions.updateStoreReduxorModule) : actions.concat(modulesActions.addStoreReduxorModule);
 
-            return actions;
+            const actionsFlattened = actions.reduce((a, b) => a.concat(b));
+            return actionsFlattened;
         }
     }
 }

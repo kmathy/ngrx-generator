@@ -22,6 +22,12 @@ module.exports = {
       templateFile: './templates/CRUD/_reducer.spec.ts'
     }
   ],
+
+  reducerWithoutSpec: [{
+    type: 'add',
+    path: '{{ basePath }}/{{ folder name "reducers" }}/{{kebabCase name}}.reducer.ts',
+    templateFile: './templates/CRUD/_reducer.ts'
+  }],
     
   /*
     * Effect generator
@@ -33,7 +39,13 @@ module.exports = {
   }, {
     type: 'add',
     path: '{{ basePath }}/{{ folder name "effects" }}/{{kebabCase name}}.effects.spec.ts',
-    templateFile: './templates/CRUD/_effects.spec.ts'
+    templateFile: './templates/CRUD/_effect.spec.ts'
+  }],
+
+  effectWithoutSpec: [{
+    type: 'add',
+    path: '{{ basePath }}/{{ folder name "effects" }}/{{kebabCase name}}.effects.ts',
+    templateFile: './templates/CRUD/_effect.ts'
   }],
     
   /*
@@ -47,5 +59,11 @@ module.exports = {
     type: 'add',
     path: '{{ basePath }}/{{ folder name "services" }}/{{kebabCase name}}.service.spec.ts',
     templateFile: './templates/CRUD/_service.spec.ts'
+  }],
+
+  serviceWithoutSpec: [{
+    type: 'add',
+    path: '{{ basePath }}/{{ folder name "services" }}/{{kebabCase name}}.service.ts',
+    templateFile: './templates/CRUD/_service.ts'
   }]
 }

@@ -1,4 +1,5 @@
 {
 	"BASE_PATH": "./examples",
-	"SEPARATE_DIRECTORY": false
+	"SEPARATE_DIRECTORY": false,
+	"IGNORE_SPEC": false
 }
