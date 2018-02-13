@@ -40,7 +40,7 @@ npm install -g ngx-reduxor
 
 or with Yarn:
 ```shell
-yarn add --dev ngx-reduxor
+yarn global add ngx-reduxor
 ```
 ### Locally in a project
 Install it via npm:
