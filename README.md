@@ -1,5 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/npm/dt/ngx-reduxor.svg">
+  <img src="https://img.shields.io/npm/dm/ngx-reduxor.svg">
   <img src="https://img.shields.io/npm/v/ngx-reduxor.svg">
 </p>
 <p align="center">
