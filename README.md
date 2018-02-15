@@ -1,5 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/npm/dt/ngx-reduxor.svg">
+  <img src="https://img.shields.io/npm/dm/ngx-reduxor.svg">
   <img src="https://img.shields.io/npm/v/ngx-reduxor.svg">
 </p>
 <p align="center">
@@ -40,7 +41,7 @@ npm install -g ngx-reduxor
 
 or with Yarn:
 ```shell
-yarn add --dev ngx-reduxor
+yarn global add ngx-reduxor
 ```
 ### Locally in a project
 Install it via npm:
