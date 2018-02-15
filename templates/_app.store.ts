@@ -5,8 +5,7 @@ import {
     createSelector,
     createFeatureSelector,
 } from '@ngrx/store';
-// import * as fromRouter from '@ngrx/router-store'; // in case you need it
-
+import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
  * exception will be thrown. This is useful during development mode to
@@ -16,15 +15,18 @@ import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from 'environments/environment';
 
+import * as router from './router-serializer';
 // -- IMPORT REDUCER --
 import * as {{ camelCase name }} from './{{ folder name 'reducers' }}/{{ kebabCase name }}.reducer';
 
 export interface State {
+    router: RouterReducerState<router.RouterStateUrl>;
     // -- IMPORT STATE --
     {{ camelCase name }}: {{ camelCase name }}.{{ titleCase name }}State;
 }
 
 export const reducers: ActionReducerMap<State> = {
+    router: routerReducer,
     // -- ADD REDUCER --
     {{ camelCase name }}: {{ camelCase name }}.reducer
 };
