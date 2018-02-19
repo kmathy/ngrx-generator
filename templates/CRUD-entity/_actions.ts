@@ -6,58 +6,67 @@ import { HttpErrorResponse } from '@angular/common/http';
  * e.g export const LOAD_USERS = '[Auth] Load USERS'
  */
 
-export const LOAD_{{ constantCase name }}S =                 '[{{ titleCase name }}] Load {{ titleCase name }}s';
-export const LOAD_{{ constantCase name }}S_SUCCESS =         '[{{ titleCase name }}] Load {{ titleCase name }}s Success';
-export const LOAD_{{ constantCase name }}S_FAIL =            '[{{ titleCase name }}] Load {{ titleCase name }}s Fail';
+export const LOAD_{{ constantCase plural }} =                 '[{{ titleCase plural }}] Load {{ titleCase plural }}';
+export const LOAD_{{ constantCase plural }}_SUCCESS =         '[{{ titleCase plural }}] Load {{ titleCase plural }} Success';
+export const LOAD_{{ constantCase plural }}_FAIL =            '[{{ titleCase plural }}] Load {{ titleCase plural }} Fail';
+
+export const SELECT_{{ constantCase name }} = '[{{ titleCase name }}] Select {{ titleCase name }}';
 
 export const ADD_{{ constantCase name }} =              '[{{ titleCase name }}] Add {{ titleCase name }}';
 export const ADD_{{ constantCase name }}_SUCCESS =      '[{{ titleCase name }}] Add {{ titleCase name }} Success';
 export const ADD_{{ constantCase name }}_FAIL =         '[{{ titleCase name }}] Add {{ titleCase name }} Fail';
 
-export const ADD_{{ constantCase name }}S =              '[{{ titleCase name }}] Add {{ titleCase name }}s';
-export const ADD_{{ constantCase name }}S_SUCCESS =      '[{{ titleCase name }}] Add {{ titleCase name }}s Success';
-export const ADD_{{ constantCase name }}S_FAIL =         '[{{ titleCase name }}] Add {{ titleCase name }}s Fail';
+export const ADD_{{ constantCase plural }} =              '[{{ titleCase plural }}] Add {{ titleCase plural }}';
+export const ADD_{{ constantCase plural }}_SUCCESS =      '[{{ titleCase plural }}] Add {{ titleCase plural }} Success';
+export const ADD_{{ constantCase plural }}_FAIL =         '[{{ titleCase plural }}] Add {{ titleCase plural }} Fail';
 
 export const UPDATE_{{ constantCase name }} =              '[{{ titleCase name }}] Update {{ titleCase name }}';
 export const UPDATE_{{ constantCase name }}_SUCCESS =      '[{{ titleCase name }}] Update {{ titleCase name }} Success';
 export const UPDATE_{{ constantCase name }}_FAIL =         '[{{ titleCase name }}] Update {{ titleCase name }} Fail';
 
-export const UPDATE_{{ constantCase name }}S =              '[{{ titleCase name }}] Update {{ titleCase name }}s';
-export const UPDATE_{{ constantCase name }}S_SUCCESS =      '[{{ titleCase name }}] Update {{ titleCase name }}s Success';
-export const UPDATE_{{ constantCase name }}S_FAIL =         '[{{ titleCase name }}] Update {{ titleCase name }}s Fail';
+export const UPDATE_{{ constantCase plural }} =              '[{{ titleCase plural }}] Update {{ titleCase plural }}';
+export const UPDATE_{{ constantCase plural }}_SUCCESS =      '[{{ titleCase plural }}] Update {{ titleCase plural }} Success';
+export const UPDATE_{{ constantCase plural }}_FAIL =         '[{{ titleCase plural }}] Update {{ titleCase plural }} Fail';
 
 export const DELETE_{{ constantCase name }} =              '[{{ titleCase name }}] Delete {{ titleCase name }}';
 export const DELETE_{{ constantCase name }}_SUCCESS =      '[{{ titleCase name }}] Delete {{ titleCase name }} Success';
 export const DELETE_{{ constantCase name }}_FAIL =         '[{{ titleCase name }}] Delete {{ titleCase name }} Fail';
 
-export const DELETE_{{ constantCase name }}S =              '[{{ titleCase name }}] Delete {{ titleCase name }}s';
-export const DELETE_{{ constantCase name }}S_SUCCESS =      '[{{ titleCase name }}] Delete {{ titleCase name }}s Success';
-export const DELETE_{{ constantCase name }}S_FAIL =         '[{{ titleCase name }}] Delete {{ titleCase name }}s Fail';
+export const DELETE_{{ constantCase plural }} =              '[{{ titleCase plural }}] Delete {{ titleCase plural }}';
+export const DELETE_{{ constantCase plural }}_SUCCESS =      '[{{ titleCase plural }}] Delete {{ titleCase plural }} Success';
+export const DELETE_{{ constantCase plural }}_FAIL =         '[{{ titleCase plural }}] Delete {{ titleCase plural }} Fail';
 
-export const CLEAR_{{ constantCase name }}S =              '[{{ titleCase name }}] Clear {{ titleCase name }}s';
-export const CLEAR_{{ constantCase name }}S_SUCCESS =      '[{{ titleCase name }}] Clear {{ titleCase name }}s Success';
-export const CLEAR_{{ constantCase name }}S_FAIL =         '[{{ titleCase name }}] Clear {{ titleCase name }}s Fail';
+export const CLEAR_{{ constantCase plural }} =              '[{{ titleCase plural }}] Clear {{ titleCase plural }}';
 
 /**
- * Load {{ titleCase name }}s Actions
- * e.g LoadAuthAction
+ * Load {{ titleCase plural }} Actions
+ * e.g LoadUsersAction
  */
-export class Load{{ titleCase name }}sAction implements Action {
-  readonly type = LOAD_{{ constantCase name }}S;
+export class Load{{ titleCase plural }}Action implements Action {
+  readonly type = LOAD_{{ constantCase plural }};
+
+  constructor(public payload = '') { }
+}
+
+export class Load{{ titleCase plural }}SuccessAction implements Action {
+  readonly type = LOAD_{{ constantCase plural }}_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class Load{{ titleCase name }}sSuccessAction implements Action {
-  readonly type = LOAD_{{ constantCase name }}S_SUCCESS;
-
-  constructor(public payload: any) { }
-}
-
-export class Load{{ titleCase name }}sFailAction implements Action {
-  readonly type = LOAD_{{ constantCase name }}S_FAIL;
+export class Load{{ titleCase plural }}FailAction implements Action {
+  readonly type = LOAD_{{ constantCase plural }}_FAIL;
 
   constructor(public error: HttpErrorResponse) { }
+}
+
+/**
+ * Select {{ titleCase name }} Action
+ */
+
+export class Select{{ titleCase name }}Action implements Action {
+  readonly type = SELECT_{{ constantCase name }};
+  constructor(public {{ camelCase name }}ID: string | number) {}
 }
 
 /**
@@ -82,22 +91,22 @@ export class Add{{ titleCase name }}FailAction implements Action {
 }
 
 /**
- * Add {{ titleCase name }}s Actions
+ * Add {{ titleCase plural }} Actions
  */
-export class Add{{ titleCase name }}sAction implements Action {
-  readonly type = ADD_{{ constantCase name }}S;
+export class Add{{ titleCase plural }}Action implements Action {
+  readonly type = ADD_{{ constantCase plural }};
 
   constructor(public payload: any) { }
 }
 
-export class Add{{ titleCase name }}sSuccessAction implements Action {
-  readonly type = ADD_{{ constantCase name }}S_SUCCESS;
+export class Add{{ titleCase plural }}SuccessAction implements Action {
+  readonly type = ADD_{{ constantCase plural }}_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class Add{{ titleCase name }}sFailAction implements Action {
-  readonly type = ADD_{{ constantCase name }}S_FAIL;
+export class Add{{ titleCase plural }}FailAction implements Action {
+  readonly type = ADD_{{ constantCase plural }}_FAIL;
 
   constructor(public error: HttpErrorResponse) { }
 }
@@ -124,22 +133,22 @@ export class Update{{ titleCase name }}FailAction implements Action {
 }
 
 /**
- * Update {{ titleCase name }}s Actions
+ * Update {{ titleCase plural }} Actions
  */
-export class Update{{ titleCase name }}sAction implements Action {
-  readonly type = UPDATE_{{ constantCase name }}S;
+export class Update{{ titleCase plural }}Action implements Action {
+  readonly type = UPDATE_{{ constantCase plural }};
 
   constructor(public payload: any) { }
 }
 
-export class Update{{ titleCase name }}sSuccessAction implements Action {
-  readonly type = UPDATE_{{ constantCase name }}S_SUCCESS;
+export class Update{{ titleCase plural }}SuccessAction implements Action {
+  readonly type = UPDATE_{{ constantCase plural }}_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class Update{{ titleCase name }}sFailAction implements Action {
-  readonly type = UPDATE_{{ constantCase name }}S_FAIL;
+export class Update{{ titleCase plural }}FailAction implements Action {
+  readonly type = UPDATE_{{ constantCase plural }}_FAIL;
 
   constructor(public error: HttpErrorResponse) { }
 }
@@ -166,69 +175,55 @@ export class Delete{{ titleCase name }}FailAction implements Action {
 }
 
 /**
- * Delete {{ titleCase name }}s Actions
+ * Delete {{ titleCase plural }} Actions
  */
-export class Delete{{ titleCase name }}sAction implements Action {
-  readonly type = DELETE_{{ constantCase name }}S;
+export class Delete{{ titleCase plural }}Action implements Action {
+  readonly type = DELETE_{{ constantCase plural }};
 
   constructor(public payload: any) { }
 }
 
-export class Delete{{ titleCase name }}sSuccessAction implements Action {
-  readonly type = DELETE_{{ constantCase name }}S_SUCCESS;
+export class Delete{{ titleCase plural }}SuccessAction implements Action {
+  readonly type = DELETE_{{ constantCase plural }}_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class Delete{{ titleCase name }}sFailAction implements Action {
-  readonly type = DELETE_{{ constantCase name }}S_FAIL;
+export class Delete{{ titleCase plural }}FailAction implements Action {
+  readonly type = DELETE_{{ constantCase plural }}_FAIL;
 
   constructor(public error: HttpErrorResponse) { }
 }
 
 /**
- * Clear {{ titleCase name }}s Actions
+ * Clear {{ titleCase plural }} Actions
  */
-export class Clear{{ titleCase name }}sAction implements Action {
-  readonly type = CLEAR_{{ constantCase name }}S;
+export class Clear{{ titleCase plural }}Action implements Action {
+  readonly type = CLEAR_{{ constantCase plural }};
 
   constructor(public payload: any) { }
 }
 
-export class Clear{{ titleCase name }}sSuccessAction implements Action {
-  readonly type = CLEAR_{{ constantCase name }}S_SUCCESS;
-
-  constructor(public payload: any) { }
-}
-
-export class Clear{{ titleCase name }}sFailAction implements Action {
-  readonly type = CLEAR_{{ constantCase name }}S_FAIL;
-
-  constructor(public error: HttpErrorResponse) { }
-}
-
-export type Actions =
-  | Load{{ titleCase name }}sAction
-  | Load{{ titleCase name }}sSuccessAction
-  | Load{{ titleCase name }}sFailAction
+export type Actions = Load{{ titleCase plural }}Action
+  | Load{{ titleCase plural }}SuccessAction
+  | Load{{ titleCase plural }}FailAction
+  | Select{{ titleCase plural }}Action
   | Add{{ titleCase name }}Action
   | Add{{ titleCase name }}FailAction
   | Add{{ titleCase name }}SuccessAction
-  | Add{{ titleCase name }}sAction
-  | Add{{ titleCase name }}sFailAction
-  | Add{{ titleCase name }}sSuccessAction
+  | Add{{ titleCase plural }}Action
+  | Add{{ titleCase plural }}FailAction
+  | Add{{ titleCase plural }}SuccessAction
   | Update{{ titleCase name }}Action
   | Update{{ titleCase name }}SuccessAction
   | Update{{ titleCase name }}FailAction
-  | Update{{ titleCase name }}sAction
-  | Update{{ titleCase name }}sSuccessAction
-  | Update{{ titleCase name }}sFailAction
+  | Update{{ titleCase plural }}Action
+  | Update{{ titleCase plural }}SuccessAction
+  | Update{{ titleCase plural }}FailAction
   | Delete{{ titleCase name }}Action
   | Delete{{ titleCase name }}SuccessAction
   | Delete{{ titleCase name }}FailAction
-  | Delete{{ titleCase name }}sAction
-  | Delete{{ titleCase name }}sSuccessAction
-  | Delete{{ titleCase name }}sFailAction
-  | Clear{{ titleCase name }}sAction
-  | Clear{{ titleCase name }}sSuccessAction
-  | Clear{{ titleCase name }}sFailAction;
+  | Delete{{ titleCase plural }}Action
+  | Delete{{ titleCase plural }}SuccessAction
+  | Delete{{ titleCase plural }}FailAction
+  | Clear{{ titleCase plural }}Action;

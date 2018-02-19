@@ -11,27 +11,26 @@ import * as {{ camelCase name }}Actions from '{{position "actions"}}/{{ kebabCas
 
 @Injectable()
 export class {{ properCase name }}Effects {
-  @Effect() load{{ titleCase name }}s$;
+  @Effect() load{{ titleCase plural }}$;
   @Effect() add{{ titleCase name }}$;
-  @Effect() add{{ titleCase name }}s$;
+  @Effect() add{{ titleCase plural }}$;
   @Effect() update{{ titleCase name }}$;
-  @Effect() update{{ titleCase name }}s$;
+  @Effect() update{{ titleCase plural }}$;
   @Effect() delete{{ titleCase name }}$;
-  @Effect() delete{{ titleCase name }}s$;
-  @Effect() clear{{ titleCase name }}s$;
+  @Effect() delete{{ titleCase plural }}$;
 
   constructor(
     private {{ camelCase name }}Service: {{ properCase name }}Service,
     private actions$: Actions
   ) {
-    this.load{{ titleCase name }}s$ = this.actions$
-      .ofType({{ camelCase name }}Actions.LOAD_{{ constantCase name }}S)
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Load{{ titleCase name }}sAction) =>
-        this.{{ camelCase name }}Service.load{{ titleCase name }}s().pipe(
+    this.load{{ titleCase plural }}$ = this.actions$
+      .ofType({{ camelCase name }}Actions.LOAD_{{ constantCase plural }})
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Load{{ titleCase plural }}Action) =>
+        this.{{ camelCase name }}Service.load{{ titleCase plural }}().pipe(
           // If successful, dispatch success action with result
-          map(res => new {{ camelCase name }}Actions.Load{{ titleCase name }}sSuccessAction(res)),
+          map(res => new {{ camelCase name }}Actions.Load{{ titleCase plural }}SuccessAction(res)),
           // If request fails, dispatch failed action
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Load{{ titleCase name }}sFailAction(err)))
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Load{{ titleCase plural }}FailAction(err)))
         )
       ));
 
@@ -44,12 +43,12 @@ export class {{ properCase name }}Effects {
         )
       ));
 
-    this.add{{ titleCase name }}s$ = this.actions$
-      .ofType({{ camelCase name }}Actions.ADD_{{ constantCase name }}S)
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Add{{ titleCase name }}sAction) =>
-        this.{{ camelCase name}}Service.add{{ titleCase name }}s(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Add{{ titleCase name }}sSuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Add{{ titleCase name }}sFailAction(err)))
+    this.add{{ titleCase plural }}$ = this.actions$
+      .ofType({{ camelCase name }}Actions.ADD_{{ constantCase plural }})
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Add{{ titleCase plural }}Action) =>
+        this.{{ camelCase name}}Service.add{{ titleCase plural }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Add{{ titleCase plural }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Add{{ titleCase plural }}FailAction(err)))
         )
       ));
 
@@ -62,12 +61,12 @@ export class {{ properCase name }}Effects {
         )
       ));
 
-    this.update{{ titleCase name }}s$ = this.actions$
-      .ofType({{ camelCase name }}Actions.UPDATE_{{ constantCase name }}S)
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ titleCase name }}sAction) =>
-        this.{{ camelCase name }}Service.update{{ titleCase name }}s(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Update{{ titleCase name }}sSuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Update{{ titleCase name }}sFailAction(err)))
+    this.update{{ titleCase plural }}$ = this.actions$
+      .ofType({{ camelCase name }}Actions.UPDATE_{{ constantCase plural }})
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ titleCase plural }}Action) =>
+        this.{{ camelCase name }}Service.update{{ titleCase plural }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Update{{ titleCase plural }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Update{{ titleCase plural }}FailAction(err)))
         )
       ));
 
@@ -80,21 +79,12 @@ export class {{ properCase name }}Effects {
         )
       ));
 
-    this.delete{{ titleCase name }}s$ = this.actions$
-      .ofType({{ camelCase name }}Actions.DELETE_{{ constantCase name }}S)
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ titleCase name }}sAction) =>
-        this.{{ camelCase name }}Service.delete{{ titleCase name }}s(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Delete{{ titleCase name }}sSuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Delete{{ titleCase name }}sFailAction(err)))
-        )
-      ));
-
-    this.clear{{ titleCase name }}s$ = this.actions$
-      .ofType({{ camelCase name }}Actions.CLEAR_{{ constantCase name }}S)
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Clear{{ titleCase name }}sAction) =>
-        this.{{ camelCase name }}Service.clear{{ titleCase name }}s(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Clear{{ titleCase name }}sSuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Clear{{ titleCase name }}sFailAction(err)))
+    this.delete{{ titleCase plural }}$ = this.actions$
+      .ofType({{ camelCase name }}Actions.DELETE_{{ constantCase plural }})
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ titleCase plural }}Action) =>
+        this.{{ camelCase name }}Service.delete{{ titleCase plural }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Delete{{ titleCase plural }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Delete{{ titleCase plural }}FailAction(err)))
         )
       ));
   }

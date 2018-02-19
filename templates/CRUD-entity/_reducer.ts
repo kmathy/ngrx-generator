@@ -2,194 +2,189 @@ import * as {{ camelCase name }} from '{{position "actions"}}/{{ kebabCase name 
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { createEntityAdapter, EntityState, EntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector } from '@ngrx/store';
 
-export interface I{{ titleCase name }} {
+export interface {{ titleCase name }} { // Or you can replace it by importing your own model
   id: number;
 }
 
-export const {{ camelCase name }}Adapter: EntityAdapter<I{{ titleCase name }}> = createEntityAdapter<I{{ titleCase name }}>();
+export const {{ camelCase name }}Adapter: EntityAdapter<{{ titleCase name }}> = createEntityAdapter<{{ titleCase name }}>({
+  sortComparer: false
+});
 // tslint:disable-next-line:no-empty-interface
-export interface {{ titleCase name }}State extends EntityState<I{{ titleCase name }}> {
+export interface {{ titleCase name }}State extends EntityState<{{ titleCase name }}> {
   loading: boolean;
-  errorMessage: string | null;
-  successMessage: string | null;
+  error: HttpErrorResponse;
+  selected{{ titleCase name }}ID: string | number | null;
 }
 
 export const default{{ titleCase name }}State = {
-  ids: [0],
-  entities: {
-    0: {
-      id: 0,
-    }
-  },
   loading: false,
-  errorMessage: null,
-  successMessage: null
+  error: null,
+  selected{{ titleCase name }}ID: null
 };
 
 export const initial{{ titleCase name }}State: {{ titleCase name }}State = {{ camelCase name }}Adapter.getInitialState(default{{ titleCase name }}State);
 
 export function reducer(state = initial{{ titleCase name }}State, action: {{ camelCase name }}.Actions): {{ titleCase name }}State {
   switch (action.type) {
-    case {{ camelCase name }}.LOAD_{{ constantCase name }}S:
+    case {{ camelCase name }}.LOAD_{{ constantCase plural }}:
       return {
-        ...{{ camelCase name }}Adapter.addAll(action.payload.{{ camelCase name }}s, state),
+        ...state,
         loading: true,
+        error: null
       };
 
-    case {{ camelCase name }}.LOAD_{{ constantCase name }}S_SUCCESS:
+    case {{ camelCase name }}.LOAD_{{ constantCase plural }}_SUCCESS:
+      return {
+        ...{{ camelCase name }}Adapter.addAll(action.payload, state),
+        loading: false,
+        error: null
+      };
+
+    case {{ camelCase name }}.LOAD_{{ constantCase plural }}_FAIL:
       return {
         ...state,
         loading: false,
-        successMessage: 'Loading of {{ titleCase name }} has been successful!'
+        error: action.error
       };
 
-    case {{ camelCase name }}.LOAD_{{ constantCase name }}S_FAIL:
+    case {{ camelCase name }}.SELECT_{{ constantCase name }}:
       return {
         ...state,
         loading: false,
-        errorMessage: action.error
-      };
+        error: null,
+        selected{{ titleCase name }}ID: action.{{ camelCase name }}ID
+      }
 
     case {{ camelCase name }}.ADD_{{ constantCase name }}:
       return {
-        ...{{ camelCase name }}Adapter.addOne(action.payload.{{ camelCase name }}, state),
-        loading: true
-      };
-
-    case {{ camelCase name }}.ADD_{{ constantCase name }}_SUCCESS:
-      return {
         ...state,
+        loading: true,
+        error: null
+      };
+      
+      case {{ camelCase name }}.ADD_{{ constantCase name }}_SUCCESS:
+      return {
+        ...{{ camelCase name }}Adapter.addOne(action.payload.{{ camelCase name }}, state),
         loading: false,
-        successMessage: 'Loading of {{ titleCase name }} has been successful!'
+        error: null
       };
 
     case {{ camelCase name }}.ADD_{{ constantCase name }}_FAIL:
       return {
         ...state,
         loading: false,
-        errorMessage: action.error
+        error: action.error
       };
 
-    case {{ camelCase name }}.ADD_{{ constantCase name }}S:
+    case {{ camelCase name }}.ADD_{{ constantCase plural }}:
       return {
-        ...{{ camelCase name }}Adapter.addMany(action.payload.{{ camelCase name }}s, state),
-        loading: true
+        ...state,
+        loading: true,
+        error: null
+      };
+      
+      case {{ camelCase name }}.ADD_{{ constantCase plural }}_SUCCESS:
+      return {
+        ...{{ camelCase name }}Adapter.addMany(action.payload.{{ camelCase plural }}, state),
+        loading: false,
+        error: null
       };
 
-    case {{ camelCase name }}.ADD_{{ constantCase name }}S_SUCCESS:
+    case {{ camelCase name }}.ADD_{{ constantCase plural }}_FAIL:
       return {
         ...state,
         loading: false,
-        successMessage: 'Loading of {{ titleCase name }} has been successful!'
-      };
-
-    case {{ camelCase name }}.ADD_{{ constantCase name }}S_FAIL:
-      return {
-        ...state,
-        loading: false,
-        errorMessage: action.error
+        error: action.error
       };
 
     case {{ camelCase name }}.UPDATE_{{ constantCase name }}:
       return {
-        ...{{ camelCase name }}Adapter.updateOne(action.payload.id, state),
-        loading: true
-      };
-
-    case {{ camelCase name }}.UPDATE_{{ constantCase name }}_SUCCESS:
-      return {
         ...state,
+        loading: true,
+        error: null
+      };
+      
+      case {{ camelCase name }}.UPDATE_{{ constantCase name }}_SUCCESS:
+      return {
+        ...{{ camelCase name }}Adapter.updateOne(action.payload.id, state),
         loading: false,
-        successMessage: 'Loading of {{ titleCase name }} has been successful!'
+        error: null
       };
 
     case {{ camelCase name }}.UPDATE_{{ constantCase name }}_FAIL:
       return {
         ...state,
         loading: false,
-        errorMessage: action.error
+        error: action.error
       };
 
-    case {{ camelCase name }}.UPDATE_{{ constantCase name }}S:
+    case {{ camelCase name }}.UPDATE_{{ constantCase plural }}:
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+      
+      case {{ camelCase name }}.UPDATE_{{ constantCase plural }}_SUCCESS:
       return {
         ...{{ camelCase name }}Adapter.updateMany(action.payload.ids, state),
-        loading: true
+        loading: false,
+        error: null
       };
 
-    case {{ camelCase name }}.UPDATE_{{ constantCase name }}S_SUCCESS:
+    case {{ camelCase name }}.UPDATE_{{ constantCase plural }}_FAIL:
       return {
         ...state,
         loading: false,
-        successMessage: 'Loading of {{ titleCase name }} has been successful!'
-      };
-
-    case {{ camelCase name }}.UPDATE_{{ constantCase name }}S_FAIL:
-      return {
-        ...state,
-        loading: false,
-        errorMessage: action.error
+        error: action.error
       };
 
     case {{ camelCase name }}.DELETE_{{ constantCase name }}:
       return {
-        ...{{ camelCase name }}Adapter.removeOne(action.payload.id, state),
-        loading: true
-      };
-
-    case {{ camelCase name }}.DELETE_{{ constantCase name }}_SUCCESS:
-      return {
         ...state,
+        loading: true,
+        error: null
+      };
+      
+      case {{ camelCase name }}.DELETE_{{ constantCase name }}_SUCCESS:
+      return {
+        ...{{ camelCase name }}Adapter.removeOne(action.payload.id, state),
         loading: false,
-        successMessage: 'Loading of {{ titleCase name }} has been successful!'
+        error: null
       };
 
     case {{ camelCase name }}.DELETE_{{ constantCase name }}_FAIL:
       return {
         ...state,
         loading: false,
-        errorMessage: action.error
+        error: action.error
       };
 
-    case {{ camelCase name }}.DELETE_{{ constantCase name }}S:
+    case {{ camelCase name }}.DELETE_{{ constantCase plural }}:
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+      
+      case {{ camelCase name }}.DELETE_{{ constantCase plural }}_SUCCESS:
       return {
         ...{{ camelCase name }}Adapter.removeOne(action.payload.ids, state),
-        loading: true
+        loading: false,
+        error: null
       };
 
-    case {{ camelCase name }}.DELETE_{{ constantCase name }}S_SUCCESS:
+    case {{ camelCase name }}.DELETE_{{ constantCase plural }}_FAIL:
       return {
         ...state,
         loading: false,
-        successMessage: 'Loading of {{ titleCase name }} has been successful!'
+        error: action.error
       };
 
-    case {{ camelCase name }}.DELETE_{{ constantCase name }}S_FAIL:
+    case {{ camelCase name }}.CLEAR_{{ constantCase plural }}:
       return {
-        ...state,
-        loading: false,
-        errorMessage: action.error
-      };
-
-    case {{ camelCase name }}.CLEAR_{{ constantCase name }}S:
-      return {
-        ...{{ camelCase name }}Adapter.removeAll({ ...state }),
-        loading: true
-      };
-
-    case {{ camelCase name }}.CLEAR_{{ constantCase name }}S_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        successMessage: 'Loading of {{ titleCase name }} has been successful!'
-      };
-
-    case {{ camelCase name }}.CLEAR_{{ constantCase name }}S_FAIL:
-      return {
-        ...state,
-        loading: false,
-        errorMessage: action.error
+        ...{{ camelCase name }}Adapter.removeAll({ ...state, loading: true, error: null, selected{{ titleCase name }}ID: null }),
       };
 
     default: {
@@ -197,12 +192,3 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
     }
   }
 }
-
-export const get{{ titleCase name }}State = createFeatureSelector<{{ titleCase name }}State>('{{ camelCase name }}');
-
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal
-} = {{ camelCase name }}Adapter.getSelectors(get{{ titleCase name }}State);

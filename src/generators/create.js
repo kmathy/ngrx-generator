@@ -19,34 +19,40 @@ module.exports = function(options) {
                 type: 'input',
                 name: 'name',
                 message: 'Name for the new store object?',
-                validate: (name) => validators.validateName(name),
+                validate: (name) => validators.required(name),
                 description: 'object must be singular'
             }, 
             {
                 type: 'list',
                 name: 'store',
                 message: 'What kind of store do you want to generate?',
-                choices: ['CRUD', 'Basic']
+                choices: ['Basic', 'CRUD', 'Entity'],
+                filter: (val) => val.toUpperCase()
             },
             {
-                type: 'list',
-                name: 'entity',
-                message: 'Is this a collection using ngrx/entity?',
-                when: function(answers) {
-                    return answers.store === 'CRUD'
-                },
-                choices: ['Yes', 'No']
+                type: 'input',
+                name: 'plural',
+                message: (answers) => `Enter the plural of '${answers.name}':`,
+                when: (answers) => answers.store === 'ENTITY',
+                validate: (plural) => validators.required(plural)
             }
         ],
         actions: (data) => {
-            let actions = 
-            options.IGNORE_SPEC ?
-                data.store === 'Basic' ? [basicActions.action, basicActions.reducerWithoutSpec, basicActions.effectWithoutSpec, basicActions.serviceWithoutSpec]
-                : data.entity === 'Yes' ? [crudEntityActions.action, crudEntityActions.reducerWithoutSpec, crudEntityActions.effectWithoutSpec, crudEntityActions.serviceWithoutSpec]
-                : [crudActions.action, crudActions.reducerWithoutSpec, crudActions.effectWithoutSpec, crudActions.serviceWithoutSpec]
-            : data.store === 'Basic' ? [basicActions.action, basicActions.reducer, basicActions.effect, basicActions.service]
-            : data.entity === 'Yes' ? [crudEntityActions.action, crudEntityActions.reducer, crudEntityActions.effect, crudEntityActions.service]
-            : [crudActions.action, crudActions.reducer, crudActions.effect, crudActions.service]
+            let actions = [];
+            switch (data.store) {
+                case 'BASIC': actions = options.IGNORE_SPEC 
+                    ? [basicActions.action, basicActions.reducerWithoutSpec, basicActions.effectWithoutSpec, basicActions.serviceWithoutSpec]
+                    : [basicActions.action, basicActions.reducer, basicActions.effect, basicActions.service]
+                    break;
+                case 'CRUD': actions = options.IGNORE_SPEC
+                    ? [crudActions.action, crudActions.reducerWithoutSpec, crudActions.effectWithoutSpec, crudActions.serviceWithoutSpec]
+                    : [crudActions.action, crudActions.reducer, crudActions.effect, crudActions.service]
+                    break;
+                case 'ENTITY': actions = options.IGNORE_SPEC
+                    ? [crudEntityActions.action, crudEntityActions.selector, crudEntityActions.reducerWithoutSpec, crudEntityActions.effectWithoutSpec, crudEntityActions.serviceWithoutSpec]
+                    : [crudEntityActions.action, crudEntityActions.selector, crudEntityActions.reducer, crudEntityActions.effect, crudEntityActions.service]
+                    break;
+            }
 
             const indexExists = fs.existsSync(options.BASE_PATH, 'app.store.ts');
             const allEffectsExists = fs.existsSync(options.BASE_PATH, 'all-effects.ts');

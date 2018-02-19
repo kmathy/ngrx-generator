@@ -7,6 +7,16 @@ module.exports = {
       path: '{{ basePath }}/{{ folder name "actions" }}/{{kebabCase name}}.actions.ts',
       templateFile: './templates/CRUD-entity/_actions.ts'
     }],
+
+    /*
+    * Selector generator
+    */
+
+    selector: [{
+      type: 'add',
+      path: '{{ basePath }}/{{ folder name "selectors" }}/{{kebabCase name}}.selectors.ts',
+      templateFile: './templates/CRUD-entity/_selectors.ts'
+    }],
       
     /*
     * Reducer generator

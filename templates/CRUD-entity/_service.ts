@@ -7,7 +7,7 @@ export class {{ properCase name }}Service {
 
   constructor(private http: HttpClient) { }
 
-  load{{ titleCase name }}s(): Observable<any> {
+  load{{ titleCase plural }}(): Observable<any> {
     return this.http.get('https://api.com');
   }
 
@@ -15,7 +15,7 @@ export class {{ properCase name }}Service {
     return this.http.post('https://api.com', { body: param });
   }
 
-  add{{ titleCase name }}s(param: any): Observable<any> {
+  add{{ titleCase plural }}(param: any): Observable<any> {
     return this.http.post('https://api.com', { body: param });
   }
 
@@ -23,7 +23,7 @@ export class {{ properCase name }}Service {
     return this.http.patch('https://api.com', { body: param });
   }
 
-  update{{ titleCase name }}s(param: any): Observable<any> {
+  update{{ titleCase plural }}(param: any): Observable<any> {
     return this.http.patch('https://api.com', { body: param });
   }
 
@@ -31,12 +31,8 @@ export class {{ properCase name }}Service {
     return this.http.delete('https://api.com');
   }
 
-  delete{{ titleCase name }}s(param: any): Observable<any> {
+  delete{{ titleCase plural }}(param: any): Observable<any> {
     return this.http.delete('https://api.com');
-  }
-
-  clear{{ titleCase name }}s(param: any): Observable<any> {
-    return;
   }
 
 }
