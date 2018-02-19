@@ -3,20 +3,16 @@
   <img src="https://img.shields.io/npm/dm/ngx-reduxor.svg">
   <img src="https://img.shields.io/npm/v/ngx-reduxor.svg">
 </p>
-<p align="center">
-<img width="400" src="https://github.com/kmathy/ngx-reduxor/blob/master/Ngx-reduxor.png" alt="Logo">
-</p>
 
 ## [For Version 1, check this readme.md](https://github.com/kmathy/ngx-reduxor/blob/master/README_v1.md)
 
 ## Intro
 If you are a user of @ngrx libs, check this generator! This will help you to save time by creating an architecture for your ngrx files. 
 
-* Create Actions, reducers, effects and services in one command! Just provide a name and the generator will do the rest.
+* Create an **entity** is easy. Just provide a name and it will generate all the files!
+* Create a **router-serializer** to use @ngrx/router-store.
 * Provide a module to easily import all the reducers, effects and services in your Angular app.
-* Naming convention to prevent errors.
 * MetaReducer: non-invasive logger in development.
-* Generator available: CRUD actions, CRUD advanced actions using Entity, Basic actions.
 * Mainly inspired by the [ngrx styleguide](https://github.com/orizens/ngrx-styleguide)
 * Use the latest Angular HttpClient.
 * Use lettable operators in Rxjs.
@@ -25,10 +21,10 @@ If you are a user of @ngrx libs, check this generator! This will help you to sav
 ## prerequisites
 
 ```
-@ngrx/store@^5.0.0
-@ngrx/effects@^5.0.1
-@ngrx/entity@^5.0.1
-ngrx-store-freeze
+@ngrx/store@^5.0.0 // Required
+@ngrx/effects@^5.0.1 // Required
+@ngrx/entity@^5.0.1 // Optional but recommended. (Required if you generate entity)
+ngrx-store-freeze // Optional but recommended. Useful to prevent state mutation.
 ```
 
 ## Getting Started
@@ -67,7 +63,13 @@ If you want to install it locally, you have to add the following in your package
 ```
 
 If installed globally, you can directly use the Generator like the Angular CLI.<br>
-The first time you launch the generator, it will create a new file for the configuration.
+The first time you launch the generator, it will create a new file for the configuration:
+
+| Option             | Description                                                             | Type    | Default           |
+|--------------------|-------------------------------------------------------------------------|---------|-------------------|
+| BASE_PATH          | Path to put the generated files                                         | String  | './src/app/store' |
+| SEPARATE_DIRECTORY | If true, separate each action, reducer, service,... In their own folder | Boolean | false             |
+| IGNORE_SPEC        | If true, skip generation of spec files                                  | Boolean | false             |
 
 ## Usage
 You need to use the generator at the root of your project.
@@ -100,12 +102,18 @@ imports: [
 ...
 ```
 
-## Note when generating an Entity
+## Generate Entity
 
-* Take note that the new store object name must be `singular`.
+If you want to generate an entity, you need to provide the **singular** of the name. After, you will be asked to provide
+the plural of this name in order to correctly generate the files.
 
-And then, follow the instructions... ;-)
-Congratulations! You are now able to create huge and scalable app in Redux inside your Angular applications!
+## Generate router-serializer
+
+To use this feature:
+* You firstly need to generate your first store object. So that, the module and the required files (app.store,...)  are created.
+* Ensure you have **@ngrx/router-store** installed in your project and existing in your package.json.
+
+If these two conditions are met, you will be able to generate the router-serializer (it also update store-reduxor.module and app.store with routerReducer ect)
 
 ## Contributors
 
@@ -117,9 +125,3 @@ Special thanks to contributors for their hard work!! 🙏 Do you want to contrib
 
 ## Issues/Improvements
 Don't hesitate to send a PR or to contribute to this project. If you have suggestion or a problem, feel free to open an issue.
-
-## [Wiki](https://github.com/kmathy/ngx-reduxor/wiki)
-A wiki is being written to provide a documentation of the architecture for each generator, some best practices to use in Ngrx or to facilitate your development. Everyone can contribute. This is also a place to put some kind messages about how you love this tool (A bit of softness in this brutal world)
-
-## Roadmap
-It is just the beginning! The idea is to provide a tool that can help you to manage easily your ngrx applications and also, create powerful actions. [See the next version](https://github.com/kmathy/ngx-reduxor/projects/1)
