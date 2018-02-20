@@ -1,3 +1,5 @@
+To get changelog of the latest versions, check [releases github](https://github.com/kmathy/ngx-reduxor/releases)
+
 ## 2.0.2 (01/01/2018)
 **Fix:**: remove unused option<br>
 **Fix:**: make StoreDevtoolModule optional
