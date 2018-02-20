@@ -1,5 +1,5 @@
 {
-    "BASE_PATH": "./src/store",
+    "BASE_PATH": "./src/app/store",
     "SEPARATE_DIRECTORY": false,
     "IGNORE_SPEC": false
 }
