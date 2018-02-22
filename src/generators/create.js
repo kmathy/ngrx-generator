@@ -17,7 +17,16 @@ const crudMethods = [
     {name: 'Update', value: 'UPDATE', checked: true}, 
     {name: 'Delete', value: 'DELETE', checked: true}
 ];
-const entityMethods = ['Get', 'Create', 'Create many', 'Update', 'Update many', 'Delete', 'Delete many', 'Clear'];
+const entityMethods = [
+    {name: 'Get', checked: true, value: 'GET'},
+    {name: 'Create', checked: true, value: 'CREATE'},
+    {name: 'Create many', checked: true, value: 'CREATE_MANY'},
+    {name: 'Update', checked: true, value: 'UPDATE'},
+    {name: 'Update many', checked: true, value: 'UPDATE_MANY'},
+    {name: 'Delete', checked: true, value: 'DELETE'},
+    {name: 'Delete many', checked: true, value: 'DELETE_MANY'},
+    {name: 'Clear', checked: true, value: 'CLEAR'}
+];
 
 module.exports = function(options) {
     return {
@@ -55,8 +64,7 @@ module.exports = function(options) {
                 name: 'entityMethods',
                 message: 'Select which method you want to be implemented:',
                 when: answers => answers.store === 'ENTITY',
-                choices: entityMethods.map(val => ({name: val, checked: true})),
-                filter: array => array.map(val => snakeCase(val).toUpperCase()),
+                choices: entityMethods,
                 validate: array => validators.minOptionSelected(1, array)
             }
         ],
@@ -77,12 +85,12 @@ module.exports = function(options) {
                     break;
             }
 
-            // const indexExists = fs.existsSync(options.BASE_PATH, 'app.store.ts');
-            // const allEffectsExists = fs.existsSync(options.BASE_PATH, 'all-effects.ts');
-            // const storeReduxorModuleExists = fs.existsSync(options.BASE_PATH, 'store-reduxor.module.ts');
-            // actions = indexExists ? actions.concat(modulesActions.updateIndex) : actions.concat(modulesActions.addIndex);
-            // actions = allEffectsExists ? actions.concat(modulesActions.updateAllEffects) : actions.concat(modulesActions.addAllEffects);
-            // actions = storeReduxorModuleExists ? actions.concat(modulesActions.updateStoreReduxorModule) : actions.concat(modulesActions.addStoreReduxorModule);
+            const indexExists = fs.existsSync(options.BASE_PATH, 'app.store.ts');
+            const allEffectsExists = fs.existsSync(options.BASE_PATH, 'all-effects.ts');
+            const storeReduxorModuleExists = fs.existsSync(options.BASE_PATH, 'store-reduxor.module.ts');
+            actions = indexExists ? actions.concat(modulesActions.updateIndex) : actions.concat(modulesActions.addIndex);
+            actions = allEffectsExists ? actions.concat(modulesActions.updateAllEffects) : actions.concat(modulesActions.addAllEffects);
+            actions = storeReduxorModuleExists ? actions.concat(modulesActions.updateStoreReduxorModule) : actions.concat(modulesActions.addStoreReduxorModule);
 
             const actionsFlattened = actions.reduce((a, b) => a.concat(b));
             return actionsFlattened;
