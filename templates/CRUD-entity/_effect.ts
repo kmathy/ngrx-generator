@@ -11,93 +11,93 @@ import * as {{ camelCase name }}Actions from '{{position "actions"}}/{{ kebabCas
 
 @Injectable()
 export class {{ properCase name }}Effects {
-{{#ifIn 'GET' entityMethods }}  @Effect() load{{ titleCase plural }}$;{{/ifIn}}
-{{#ifIn 'CREATE' entityMethods }}  @Effect() add{{ titleCase name }}$;{{/ifIn}}
-{{#ifIn 'CREATE_MANY' entityMethods }}  @Effect() add{{ titleCase plural }}$;{{/ifIn}}
-{{#ifIn 'UPDATE' entityMethods }}  @Effect() update{{ titleCase name }}$;{{/ifIn}}
-{{#ifIn 'UPDATE_MANY' entityMethods }}  @Effect() update{{ titleCase plural }}$;{{/ifIn}}
-{{#ifIn 'DELETE' entityMethods }}  @Effect() delete{{ titleCase name }}$;{{/ifIn}}
-{{#ifIn 'DELETE_MANY' entityMethods }}  @Effect() delete{{ titleCase plural }}$;{{/ifIn}}
+{{#ifIn 'GET' entityMethods }}  @Effect() load{{ properCase plural }}$;{{/ifIn}}
+{{#ifIn 'CREATE' entityMethods }}  @Effect() add{{ properCase name }}$;{{/ifIn}}
+{{#ifIn 'CREATE_MANY' entityMethods }}  @Effect() add{{ properCase plural }}$;{{/ifIn}}
+{{#ifIn 'UPDATE' entityMethods }}  @Effect() update{{ properCase name }}$;{{/ifIn}}
+{{#ifIn 'UPDATE_MANY' entityMethods }}  @Effect() update{{ properCase plural }}$;{{/ifIn}}
+{{#ifIn 'DELETE' entityMethods }}  @Effect() delete{{ properCase name }}$;{{/ifIn}}
+{{#ifIn 'DELETE_MANY' entityMethods }}  @Effect() delete{{ properCase plural }}$;{{/ifIn}}
 
   constructor(
     private {{ camelCase name }}Service: {{ properCase name }}Service,
     private actions$: Actions
   ) {
     {{#ifIn 'GET' entityMethods }}
-    this.load{{ titleCase plural }}$ = this.actions$
+    this.load{{ properCase plural }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.LOAD_{{ constantCase plural }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Load{{ titleCase plural }}Action) =>
-        this.{{ camelCase name }}Service.load{{ titleCase plural }}().pipe(
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Load{{ properCase plural }}Action) =>
+        this.{{ camelCase name }}Service.load{{ properCase plural }}().pipe(
           // If successful, dispatch success action with result
-          map(res => new {{ camelCase name }}Actions.Load{{ titleCase plural }}SuccessAction(res)),
+          map(res => new {{ camelCase name }}Actions.Load{{ properCase plural }}SuccessAction(res)),
           // If request fails, dispatch failed action
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Load{{ titleCase plural }}FailAction(err)))
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Load{{ properCase plural }}FailAction(err)))
         )
       ));
 
     {{/ifIn}}
     {{#ifIn 'CREATE' entityMethods }}
-    this.add{{ titleCase name }}$ = this.actions$
+    this.add{{ properCase name }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.ADD_{{ constantCase name }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Add{{ titleCase name }}Action) =>
-        this.{{ camelCase name}}Service.add{{ titleCase name }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Add{{ titleCase name }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Add{{ titleCase name }}FailAction(err)))
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Add{{ properCase name }}Action) =>
+        this.{{ camelCase name}}Service.add{{ properCase name }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Add{{ properCase name }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Add{{ properCase name }}FailAction(err)))
         )
       ));
 
     {{/ifIn}}
     {{#ifIn 'CREATE_MANY' entityMethods }}
-    this.add{{ titleCase plural }}$ = this.actions$
+    this.add{{ properCase plural }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.ADD_{{ constantCase plural }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Add{{ titleCase plural }}Action) =>
-        this.{{ camelCase name}}Service.add{{ titleCase plural }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Add{{ titleCase plural }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Add{{ titleCase plural }}FailAction(err)))
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Add{{ properCase plural }}Action) =>
+        this.{{ camelCase name}}Service.add{{ properCase plural }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Add{{ properCase plural }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Add{{ properCase plural }}FailAction(err)))
         )
       ));
 
     {{/ifIn}}
     {{#ifIn 'UPDATE' entityMethods }}
-    this.update{{ titleCase name }}$ = this.actions$
+    this.update{{ properCase name }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.UPDATE_{{ constantCase name }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ titleCase name }}Action) =>
-        this.{{ camelCase name }}Service.update{{ titleCase name }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Update{{ titleCase name }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Update{{ titleCase name }}FailAction(err)))
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ properCase name }}Action) =>
+        this.{{ camelCase name }}Service.update{{ properCase name }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Update{{ properCase name }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Update{{ properCase name }}FailAction(err)))
         )
       ));
 
     {{/ifIn}}
     {{#ifIn 'UPDATE_MANY' entityMethods }}
-    this.update{{ titleCase plural }}$ = this.actions$
+    this.update{{ properCase plural }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.UPDATE_{{ constantCase plural }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ titleCase plural }}Action) =>
-        this.{{ camelCase name }}Service.update{{ titleCase plural }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Update{{ titleCase plural }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Update{{ titleCase plural }}FailAction(err)))
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ properCase plural }}Action) =>
+        this.{{ camelCase name }}Service.update{{ properCase plural }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Update{{ properCase plural }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Update{{ properCase plural }}FailAction(err)))
         )
       ));
 
     {{/ifIn}}
     {{#ifIn 'DELETE' entityMethods }}
-    this.delete{{ titleCase name }}$ = this.actions$
+    this.delete{{ properCase name }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.DELETE_{{ constantCase name }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ titleCase name }}Action) =>
-        this.{{ camelCase name }}Service.delete{{ titleCase name }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Delete{{ titleCase name }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Delete{{ titleCase name }}FailAction(err)))
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ properCase name }}Action) =>
+        this.{{ camelCase name }}Service.delete{{ properCase name }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Delete{{ properCase name }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Delete{{ properCase name }}FailAction(err)))
         )
       ));
 
     {{/ifIn}}
     {{#ifIn 'DELETE' entityMethods }}
-    this.delete{{ titleCase plural }}$ = this.actions$
+    this.delete{{ properCase plural }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.DELETE_{{ constantCase plural }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ titleCase plural }}Action) =>
-        this.{{ camelCase name }}Service.delete{{ titleCase plural }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Delete{{ titleCase plural }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Delete{{ titleCase plural }}FailAction(err)))
+      .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ properCase plural }}Action) =>
+        this.{{ camelCase name }}Service.delete{{ properCase plural }}(state.payload).pipe(
+          map(res => new {{ camelCase name }}Actions.Delete{{ properCase plural }}SuccessAction(res)),
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Delete{{ properCase plural }}FailAction(err)))
         )
       ));
     {{/ifIn}}

@@ -19,7 +19,7 @@ import * as {{ camelCase name }} from './{{ folder name 'reducers' }}/{{ kebabCa
 
 export interface State {
     // -- IMPORT STATE --
-    {{ camelCase name }}: {{ camelCase name }}.{{ titleCase name }}State;
+    {{ camelCase name }}: {{ camelCase name }}.{{ properCase name }}State;
 }
 
 export const reducers: ActionReducerMap<State> = {

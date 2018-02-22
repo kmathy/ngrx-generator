@@ -22,12 +22,12 @@ export class {{ properCase name }}Effects {
     {{#each crudMethods}}
     this.{{ lowerCase this }}$ = this.actions$
       .ofType({{ camelCase ../name }}Actions.{{this}}_{{ constantCase ../name }})
-      .pipe(switchMap((state: {{ camelCase ../name }}Actions.{{ properCase this }}{{ titleCase ../name }}Action) =>
-        this.{{ camelCase ../name }}Service.{{ lowerCase this }}{{ titleCase ../name }}({{#isNotEqual this 'GET' }}state.payload{{/isNotEqual}}).pipe(
+      .pipe(switchMap((state: {{ camelCase ../name }}Actions.{{ properCase this }}{{ properCase ../name }}Action) =>
+        this.{{ camelCase ../name }}Service.{{ lowerCase this }}{{ properCase ../name }}({{#isNotEqual this 'GET' }}state.payload{{/isNotEqual}}).pipe(
           // If successful, dispatch success action with result
-          map(res => new {{ camelCase ../name }}Actions.{{ properCase this }}{{ titleCase ../name }}SuccessAction(res)),
+          map(res => new {{ camelCase ../name }}Actions.{{ properCase this }}{{ properCase ../name }}SuccessAction(res)),
           // If request fails, dispatch failed action
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase ../name }}Actions.{{ properCase this }}{{ titleCase ../name }}FailAction(err)))
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase ../name }}Actions.{{ properCase this }}{{ properCase ../name }}FailAction(err)))
         )
       ));
     {{/each}}

@@ -1,31 +1,31 @@
 import { Action } from '@ngrx/store';
 
-export const LOAD_{{ constantCase name }} =                 '[{{ titleCase name }}] Load {{ titleCase name }}';
-export const LOAD_{{ constantCase name }}_SUCCESS =         '[{{ titleCase name }}] Load {{ titleCase name }} Success';
-export const LOAD_{{ constantCase name }}_FAIL =            '[{{ titleCase name }}] Load {{ titleCase name }} Fail';
+export const LOAD_{{ constantCase name }} =                 '[{{ properCase name }}] Load {{ properCase name }}';
+export const LOAD_{{ constantCase name }}_SUCCESS =         '[{{ properCase name }}] Load {{ properCase name }} Success';
+export const LOAD_{{ constantCase name }}_FAIL =            '[{{ properCase name }}] Load {{ properCase name }} Fail';
 
 /**
- * Load {{ titleCase name }} Actions
+ * Load {{ properCase name }} Actions
  */
-export class Load{{ titleCase name }}Action implements Action {
+export class Load{{ properCase name }}Action implements Action {
   readonly type = LOAD_{{ constantCase name }};
 
   constructor(public payload: any) { }
 }
 
-export class Load{{ titleCase name }}SuccessAction implements Action {
+export class Load{{ properCase name }}SuccessAction implements Action {
   readonly type = LOAD_{{ constantCase name }}_SUCCESS;
 
   constructor(public payload: any) { }
 }
 
-export class Load{{ titleCase name }}FailAction implements Action {
+export class Load{{ properCase name }}FailAction implements Action {
   readonly type = LOAD_{{ constantCase name }}_FAIL;
 
   constructor(public error: Error) { }
 }
 
 export type Actions =
-  | Load{{ titleCase name }}Action
-  | Load{{ titleCase name }}SuccessAction
-  | Load{{ titleCase name }}FailAction;
+  | Load{{ properCase name }}Action
+  | Load{{ properCase name }}SuccessAction
+  | Load{{ properCase name }}FailAction;

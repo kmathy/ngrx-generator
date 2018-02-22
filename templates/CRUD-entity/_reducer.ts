@@ -3,29 +3,29 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { createEntityAdapter, EntityState, EntityAdapter } from '@ngrx/entity';
 
-export interface {{ titleCase name }} { // Or you can replace it by importing your own model
+export interface {{ properCase name }} { // Or you can replace it by importing your own model
   id: number;
 }
 
-export const {{ camelCase name }}Adapter: EntityAdapter<{{ titleCase name }}> = createEntityAdapter<{{ titleCase name }}>({
+export const {{ camelCase name }}Adapter: EntityAdapter<{{ properCase name }}> = createEntityAdapter<{{ properCase name }}>({
   sortComparer: false
 });
 // tslint:disable-next-line:no-empty-interface
-export interface {{ titleCase name }}State extends EntityState<{{ titleCase name }}> {
+export interface {{ properCase name }}State extends EntityState<{{ properCase name }}> {
   loading: boolean;
   error: HttpErrorResponse;
-  selected{{ titleCase name }}ID: string | number | null;
+  selected{{ properCase name }}ID: string | number | null;
 }
 
-export const default{{ titleCase name }}State = {
+export const default{{ properCase name }}State = {
   loading: false,
   error: null,
-  selected{{ titleCase name }}ID: null
+  selected{{ properCase name }}ID: null
 };
 
-export const initial{{ titleCase name }}State: {{ titleCase name }}State = {{ camelCase name }}Adapter.getInitialState(default{{ titleCase name }}State);
+export const initial{{ properCase name }}State: {{ properCase name }}State = {{ camelCase name }}Adapter.getInitialState(default{{ properCase name }}State);
 
-export function reducer(state = initial{{ titleCase name }}State, action: {{ camelCase name }}.Actions): {{ titleCase name }}State {
+export function reducer(state = initial{{ properCase name }}State, action: {{ camelCase name }}.Actions): {{ properCase name }}State {
   switch (action.type) {
     {{#ifIn 'GET' entityMethods }}
     case {{ camelCase name }}.LOAD_{{ constantCase plural }}:
@@ -55,7 +55,7 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
         ...state,
         loading: false,
         error: null,
-        selected{{ titleCase name }}ID: action.{{ camelCase name }}ID
+        selected{{ properCase name }}ID: action.{{ camelCase name }}ID
       };
 
     {{#ifIn 'CREATE' entityMethods }}
@@ -199,7 +199,7 @@ export function reducer(state = initial{{ titleCase name }}State, action: {{ cam
     {{#ifIn 'CLEAR' entityMethods }}
     case {{ camelCase name }}.CLEAR_{{ constantCase plural }}:
       return {
-        ...{{ camelCase name }}Adapter.removeAll({ ...state, loading: true, error: null, selected{{ titleCase name }}ID: null }),
+        ...{{ camelCase name }}Adapter.removeAll({ ...state, loading: true, error: null, selected{{ properCase name }}ID: null }),
       };
 
     {{/ifIn}}

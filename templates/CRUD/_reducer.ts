@@ -1,7 +1,7 @@
 import * as {{ camelCase name }} from '{{position "actions"}}/{{ kebabCase name }}.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export interface {{ titleCase name }}State {
+export interface {{ properCase name }}State {
   loading: boolean;
   entities: { [id: string]: any };
   result: any[];
@@ -9,7 +9,7 @@ export interface {{ titleCase name }}State {
   type: string;
 };
 
-export const initialState: {{ titleCase name }}State = {
+export const initialState: {{ properCase name }}State = {
   loading: false,
   entities: {},
   result: [],
@@ -17,7 +17,7 @@ export const initialState: {{ titleCase name }}State = {
   type: ''
 };
 
-export function reducer(state = initialState, action: {{ camelCase name }}.Actions): {{ titleCase name }}State {
+export function reducer(state = initialState, action: {{ camelCase name }}.Actions): {{ properCase name }}State {
   switch (action.type) {
     {{#ifIn 'GET' crudMethods }}
     case {{ camelCase name }}.GET_{{ constantCase name }}: {
