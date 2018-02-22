@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export interface {{ titleCase name }}State {
   loading: boolean;
   entities: { [id: string]: any };
-  result: string[];
+  result: any[];
   error: HttpErrorResponse;
   type: string;
 };
@@ -19,6 +19,7 @@ export const initialState: {{ titleCase name }}State = {
 
 export function reducer(state = initialState, action: {{ camelCase name }}.Actions): {{ titleCase name }}State {
   switch (action.type) {
+    {{#ifIn 'GET' crudMethods }}
     case {{ camelCase name }}.GET_{{ constantCase name }}: {
       return {
         ...state,
@@ -46,7 +47,8 @@ export function reducer(state = initialState, action: {{ camelCase name }}.Actio
         type: action.type
       };
     }
-
+    {{/ifIn}}
+    {{#ifIn 'CREATE' crudMethods }}
     case {{ camelCase name }}.CREATE_{{ constantCase name }}: {
       return {
         ...state,
@@ -75,7 +77,8 @@ export function reducer(state = initialState, action: {{ camelCase name }}.Actio
         type: action.type
       };
     }
-
+    {{/ifIn}}
+    {{#ifIn 'UPDATE' crudMethods }}
     case {{ camelCase name }}.UPDATE_{{ constantCase name }}: {
       return {
         ...state,
@@ -102,7 +105,8 @@ export function reducer(state = initialState, action: {{ camelCase name }}.Actio
         type: action.type
       };
     }
-
+    {{/ifIn}}
+    {{#ifIn 'DELETE' crudMethods }}
     case {{ camelCase name }}.DELETE_{{ constantCase name }}: {
       return {
         ...state,
@@ -129,6 +133,7 @@ export function reducer(state = initialState, action: {{ camelCase name }}.Actio
         type: action.type
       };
     }
+    {{/ifIn}}
 
     default: {
       return state;

@@ -11,18 +11,19 @@ import * as {{ camelCase name }}Actions from '{{position "actions"}}/{{ kebabCas
 
 @Injectable()
 export class {{ properCase name }}Effects {
-  @Effect() load{{ titleCase plural }}$;
-  @Effect() add{{ titleCase name }}$;
-  @Effect() add{{ titleCase plural }}$;
-  @Effect() update{{ titleCase name }}$;
-  @Effect() update{{ titleCase plural }}$;
-  @Effect() delete{{ titleCase name }}$;
-  @Effect() delete{{ titleCase plural }}$;
+{{#ifIn 'GET' entityMethods }}  @Effect() load{{ titleCase plural }}$;{{/ifIn}}
+{{#ifIn 'CREATE' entityMethods }}  @Effect() add{{ titleCase name }}$;{{/ifIn}}
+{{#ifIn 'CREATE_MANY' entityMethods }}  @Effect() add{{ titleCase plural }}$;{{/ifIn}}
+{{#ifIn 'UPDATE' entityMethods }}  @Effect() update{{ titleCase name }}$;{{/ifIn}}
+{{#ifIn 'UPDATE_MANY' entityMethods }}  @Effect() update{{ titleCase plural }}$;{{/ifIn}}
+{{#ifIn 'DELETE' entityMethods }}  @Effect() delete{{ titleCase name }}$;{{/ifIn}}
+{{#ifIn 'DELETE_MANY' entityMethods }}  @Effect() delete{{ titleCase plural }}$;{{/ifIn}}
 
   constructor(
     private {{ camelCase name }}Service: {{ properCase name }}Service,
     private actions$: Actions
   ) {
+    {{#ifIn 'GET' entityMethods }}
     this.load{{ titleCase plural }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.LOAD_{{ constantCase plural }})
       .pipe(switchMap((state: {{ camelCase name }}Actions.Load{{ titleCase plural }}Action) =>
@@ -34,6 +35,8 @@ export class {{ properCase name }}Effects {
         )
       ));
 
+    {{/ifIn}}
+    {{#ifIn 'CREATE' entityMethods }}
     this.add{{ titleCase name }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.ADD_{{ constantCase name }})
       .pipe(switchMap((state: {{ camelCase name }}Actions.Add{{ titleCase name }}Action) =>
@@ -43,6 +46,8 @@ export class {{ properCase name }}Effects {
         )
       ));
 
+    {{/ifIn}}
+    {{#ifIn 'CREATE_MANY' entityMethods }}
     this.add{{ titleCase plural }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.ADD_{{ constantCase plural }})
       .pipe(switchMap((state: {{ camelCase name }}Actions.Add{{ titleCase plural }}Action) =>
@@ -52,6 +57,8 @@ export class {{ properCase name }}Effects {
         )
       ));
 
+    {{/ifIn}}
+    {{#ifIn 'UPDATE' entityMethods }}
     this.update{{ titleCase name }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.UPDATE_{{ constantCase name }})
       .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ titleCase name }}Action) =>
@@ -61,6 +68,8 @@ export class {{ properCase name }}Effects {
         )
       ));
 
+    {{/ifIn}}
+    {{#ifIn 'UPDATE_MANY' entityMethods }}
     this.update{{ titleCase plural }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.UPDATE_{{ constantCase plural }})
       .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ titleCase plural }}Action) =>
@@ -70,6 +79,8 @@ export class {{ properCase name }}Effects {
         )
       ));
 
+    {{/ifIn}}
+    {{#ifIn 'DELETE' entityMethods }}
     this.delete{{ titleCase name }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.DELETE_{{ constantCase name }})
       .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ titleCase name }}Action) =>
@@ -79,6 +90,8 @@ export class {{ properCase name }}Effects {
         )
       ));
 
+    {{/ifIn}}
+    {{#ifIn 'DELETE' entityMethods }}
     this.delete{{ titleCase plural }}$ = this.actions$
       .ofType({{ camelCase name }}Actions.DELETE_{{ constantCase plural }})
       .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ titleCase plural }}Action) =>
@@ -87,6 +100,7 @@ export class {{ properCase name }}Effects {
           catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Delete{{ titleCase plural }}FailAction(err)))
         )
       ));
+    {{/ifIn}}
   }
 
 }

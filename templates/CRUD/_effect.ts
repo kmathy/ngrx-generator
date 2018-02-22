@@ -11,52 +11,26 @@ import * as {{ camelCase name }}Actions from '{{position "actions"}}/{{ kebabCas
 
 @Injectable()
 export class {{ properCase name }}Effects {
-  @Effect() get$;
-  @Effect() create$;
-  @Effect() update$;
-  @Effect() delete$;
+  {{#each crudMethods }}
+  @Effect() {{ lowerCase this }}$;
+  {{/each}}
   
   constructor(
     private {{ camelCase name }}Service: {{ properCase name }}Service,
     private actions$: Actions
   ) {
-    this.get$ = this.actions$
-      .ofType({{ camelCase name }}Actions.GET_{{ constantCase name }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Get{{ titleCase name }}Action) =>
-        this.{{ camelCase name }}Service.get{{ titleCase name }}().pipe(
+    {{#each crudMethods}}
+    this.{{ lowerCase this }}$ = this.actions$
+      .ofType({{ camelCase ../name }}Actions.{{this}}_{{ constantCase ../name }})
+      .pipe(switchMap((state: {{ camelCase ../name }}Actions.{{ properCase this }}{{ titleCase ../name }}Action) =>
+        this.{{ camelCase ../name }}Service.{{ lowerCase this }}{{ titleCase ../name }}({{#isNotEqual this 'GET' }}state.payload{{/isNotEqual}}).pipe(
           // If successful, dispatch success action with result
-          map(res => new {{ camelCase name }}Actions.Get{{ titleCase name }}SuccessAction(res)),
+          map(res => new {{ camelCase ../name }}Actions.{{ properCase this }}{{ titleCase ../name }}SuccessAction(res)),
           // If request fails, dispatch failed action
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Get{{ titleCase name }}FailAction(err)))
+          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase ../name }}Actions.{{ properCase this }}{{ titleCase ../name }}FailAction(err)))
         )
       ));
-
-    this.create$ = this.actions$
-      .ofType({{ camelCase name }}Actions.CREATE_{{ constantCase name }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Create{{ titleCase name }}Action) =>
-        this.{{ camelCase name}}Service.create{{ titleCase name }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Create{{ titleCase name }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Create{{ titleCase name }}FailAction(err)))
-        )
-      ));
-
-    this.update$ = this.actions$
-      .ofType({{ camelCase name }}Actions.UPDATE_{{ constantCase name }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Update{{ titleCase name }}Action) =>
-        this.{{ camelCase name }}Service.update{{ titleCase name }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Update{{ titleCase name }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Update{{ titleCase name }}FailAction(err)))
-        )
-      ));
-
-    this.delete$ = this.actions$
-      .ofType({{ camelCase name }}Actions.DELETE_{{ constantCase name }})
-      .pipe(switchMap((state: {{ camelCase name }}Actions.Delete{{ titleCase name }}Action) =>
-        this.{{ camelCase name }}Service.delete{{ titleCase name }}(state.payload).pipe(
-          map(res => new {{ camelCase name }}Actions.Delete{{ titleCase name }}SuccessAction(res)),
-          catchError((err: HttpErrorResponse) => observableOf(new {{ camelCase name }}Actions.Delete{{ titleCase name }}FailAction(err)))
-        )
-      ));
+    {{/each}}
   }
 
 }

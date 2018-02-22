@@ -1,27 +1,13 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
-/**
- * Generate constants based on the given name
- * e.g export const GET_AUTH = '[Auth] Get Auth'
- */
+{{#each crudMethods }}
+export const {{this}}_{{ constantCase ../name }} =                 '[{{ titleCase ../name }}] Get {{ titleCase ../name }}';
+export const {{this}}_{{ constantCase ../name }}_SUCCESS =         '[{{ titleCase ../name }}] Get {{ titleCase ../name }} Success';
+export const {{this}}_{{ constantCase ../name }}_FAIL =            '[{{ titleCase ../name }}] Get {{ titleCase ../name }} Fail';
 
-export const GET_{{ constantCase name }} =                 '[{{ titleCase name }}] Get {{ titleCase name }}';
-export const GET_{{ constantCase name }}_SUCCESS =         '[{{ titleCase name }}] Get {{ titleCase name }} Success';
-export const GET_{{ constantCase name }}_FAIL =            '[{{ titleCase name }}] Get {{ titleCase name }} Fail';
-
-export const CREATE_{{ constantCase name }} =              '[{{ titleCase name }}] Create {{ titleCase name }}';
-export const CREATE_{{ constantCase name }}_SUCCESS =      '[{{ titleCase name }}] Create {{ titleCase name }} Success';
-export const CREATE_{{ constantCase name }}_FAIL =         '[{{ titleCase name }}] Create {{ titleCase name }} Fail';
-
-export const UPDATE_{{ constantCase name }} =              '[{{ titleCase name }}] Update {{ titleCase name }}';
-export const UPDATE_{{ constantCase name }}_SUCCESS =      '[{{ titleCase name }}] Update {{ titleCase name }} Success';
-export const UPDATE_{{ constantCase name }}_FAIL =         '[{{ titleCase name }}] Update {{ titleCase name }} Fail';
-
-export const DELETE_{{ constantCase name }} =              '[{{ titleCase name }}] Delete {{ titleCase name }}';
-export const DELETE_{{ constantCase name }}_SUCCESS =      '[{{ titleCase name }}] Delete {{ titleCase name }} Success';
-export const DELETE_{{ constantCase name }}_FAIL =         '[{{ titleCase name }}] Delete {{ titleCase name }} Fail';
-
+{{/each}}
+{{#ifIn 'GET' crudMethods }}
 /**
  * Get {{ titleCase name }} Actions
  * e.g GetAuthAction
@@ -43,7 +29,9 @@ export class Get{{ titleCase name }}FailAction implements Action {
 
   constructor(public error: HttpErrorResponse) { }
 }
+{{/ifIn}}
 
+{{#ifIn 'CREATE' crudMethods }}
 /**
  * Create {{ titleCase name }} Actions
  */
@@ -64,7 +52,9 @@ export class Create{{ titleCase name }}FailAction implements Action {
 
   constructor(public error: HttpErrorResponse) { }
 }
+{{/ifIn}}
 
+{{#ifIn 'UPDATE' crudMethods }}
 /**
  * Update {{ titleCase name }} Actions
  */
@@ -85,7 +75,9 @@ export class Update{{ titleCase name }}FailAction implements Action {
 
   constructor(public error: HttpErrorResponse) { }
 }
+{{/ifIn}}
 
+{{#ifIn 'DELETE' crudMethods }}
 /**
  * Delete {{ titleCase name }} Actions
  */
@@ -106,17 +98,11 @@ export class Delete{{ titleCase name }}FailAction implements Action {
 
   constructor(public error: HttpErrorResponse) { }
 }
+{{/ifIn}}
 
 export type Actions =
-  | Get{{ titleCase name }}Action
-  | Get{{ titleCase name }}SuccessAction
-  | Get{{ titleCase name }}FailAction
-  | Create{{ titleCase name }}Action
-  | Create{{ titleCase name }}FailAction
-  | Create{{ titleCase name }}SuccessAction
-  | Update{{ titleCase name }}Action
-  | Update{{ titleCase name }}SuccessAction
-  | Update{{ titleCase name }}FailAction
-  | Delete{{ titleCase name }}Action
-  | Delete{{ titleCase name }}SuccessAction
-  | Delete{{ titleCase name }}FailAction;
+{{#each crudMethods }}
+  | {{properCase this}}{{ titleCase ../name }}Action
+  | {{properCase this}}{{ titleCase ../name }}SuccessAction
+  | {{properCase this}}{{ titleCase ../name }}FailAction
+{{/each}};

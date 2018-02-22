@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-
+const snakeCase = require('lodash.snakecase');
 // actions
 const basicActions = require('../actions/basic-actions');
 const crudActions = require('../actions/crud-actions');
@@ -11,6 +11,14 @@ const modulesActions = require('../actions/modules-actions');
 // utils
 const validators = require('../validators');
 
+const crudMethods = [
+    {name: 'Get', value: 'GET', checked: true},
+    {name: 'Create', value: 'CREATE', checked: true}, 
+    {name: 'Update', value: 'UPDATE', checked: true}, 
+    {name: 'Delete', value: 'DELETE', checked: true}
+];
+const entityMethods = ['Get', 'Create', 'Create many', 'Update', 'Update many', 'Delete', 'Delete many', 'Clear'];
+
 module.exports = function(options) {
     return {
         description: 'Generate Actions, Reducers, Services and Effect',
@@ -19,7 +27,7 @@ module.exports = function(options) {
                 type: 'input',
                 name: 'name',
                 message: 'Name for the new store object?',
-                validate: (name) => validators.required(name),
+                validate: name => validators.required(name),
                 description: 'object must be singular'
             }, 
             {
@@ -27,14 +35,29 @@ module.exports = function(options) {
                 name: 'store',
                 message: 'What kind of store do you want to generate?',
                 choices: ['Basic', 'CRUD', 'Entity'],
-                filter: (val) => val.toUpperCase()
+                filter: val => val.toUpperCase()
             },
             {
                 type: 'input',
                 name: 'plural',
-                message: (answers) => `Enter the plural of '${answers.name}':`,
-                when: (answers) => answers.store === 'ENTITY',
-                validate: (plural) => validators.required(plural)
+                message: answers => `Enter the plural of '${answers.name}':`,
+                when: answers => answers.store === 'ENTITY',
+                validate: plural => validators.required(plural)
+            }, {
+                type: 'checkbox',
+                name: 'crudMethods',
+                message: 'Select which method you want to be implemented:',
+                when: answers => answers.store === 'CRUD',
+                choices: crudMethods,
+                validate: array => validators.minOptionSelected(1, array)
+            }, {
+                type: 'checkbox',
+                name: 'entityMethods',
+                message: 'Select which method you want to be implemented:',
+                when: answers => answers.store === 'ENTITY',
+                choices: entityMethods.map(val => ({name: val, checked: true})),
+                filter: array => array.map(val => snakeCase(val).toUpperCase()),
+                validate: array => validators.minOptionSelected(1, array)
             }
         ],
         actions: (data) => {
@@ -54,12 +77,12 @@ module.exports = function(options) {
                     break;
             }
 
-            const indexExists = fs.existsSync(options.BASE_PATH, 'app.store.ts');
-            const allEffectsExists = fs.existsSync(options.BASE_PATH, 'all-effects.ts');
-            const storeReduxorModuleExists = fs.existsSync(options.BASE_PATH, 'store-reduxor.module.ts');
-            actions = indexExists ? actions.concat(modulesActions.updateIndex) : actions.concat(modulesActions.addIndex);
-            actions = allEffectsExists ? actions.concat(modulesActions.updateAllEffects) : actions.concat(modulesActions.addAllEffects);
-            actions = storeReduxorModuleExists ? actions.concat(modulesActions.updateStoreReduxorModule) : actions.concat(modulesActions.addStoreReduxorModule);
+            // const indexExists = fs.existsSync(options.BASE_PATH, 'app.store.ts');
+            // const allEffectsExists = fs.existsSync(options.BASE_PATH, 'all-effects.ts');
+            // const storeReduxorModuleExists = fs.existsSync(options.BASE_PATH, 'store-reduxor.module.ts');
+            // actions = indexExists ? actions.concat(modulesActions.updateIndex) : actions.concat(modulesActions.addIndex);
+            // actions = allEffectsExists ? actions.concat(modulesActions.updateAllEffects) : actions.concat(modulesActions.addAllEffects);
+            // actions = storeReduxorModuleExists ? actions.concat(modulesActions.updateStoreReduxorModule) : actions.concat(modulesActions.addStoreReduxorModule);
 
             const actionsFlattened = actions.reduce((a, b) => a.concat(b));
             return actionsFlattened;
