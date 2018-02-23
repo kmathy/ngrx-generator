@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
+import { of as observableOf } from 'rxjs/observable/of';
+import { switchMap } from 'rxjs/operators/switchMap';
+import { map } from 'rxjs/operators/map';
+import { catchError } from 'rxjs/operators/catchError';
 import { BasicService } from './basic.service';
 import * as basicActions from './basic.actions';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class BasicEffects {
@@ -17,11 +18,14 @@ export class BasicEffects {
   ) {
     this.loadBasic$ = this.actions$
       .ofType(basicActions.LOAD_BASIC)
-      .switchMap((state: basicActions.LoadBasicAction) => this.basicService.loadBasic()
-        // If successful, dispatch success action with result
-        .map(res => new basicActions.LoadBasicSuccessAction(res))
-        // If request fails, dispatch failed action
-        .catch((err: Error) => Observable.of(new basicActions.LoadBasicFailAction(err)))
+      .pipe(switchMap((state: basicActions.LoadBasicAction) => 
+        this.basicService.loadBasic().pipe(
+          // If successful, dispatch success action with result
+          map(res => new basicActions.LoadBasicSuccessAction(res)),
+          // If request fails, dispatch failed action
+          catchError((err: Error) => observableOf(new basicActions.LoadBasicFailAction(err)))
+        )
+      )
       );
   }
 

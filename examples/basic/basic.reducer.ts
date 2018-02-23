@@ -28,9 +28,9 @@ export function reducer(state = initialState, action: basic.Actions): BasicState
     }
 
     case basic.LOAD_BASIC_SUCCESS: {
-      state.result = action.payload;
       return {
         ...state,
+        result: action.payload,
         loading: false,
         error: null,
         type: action.type

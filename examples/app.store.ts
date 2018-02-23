@@ -1,3 +1,4 @@
+import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import {
     ActionReducerMap,
     ActionReducer,
@@ -5,8 +6,6 @@ import {
     createSelector,
     createFeatureSelector,
 } from '@ngrx/store';
-// import * as fromRouter from '@ngrx/router-store'; // in case you need it
-
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
  * exception will be thrown. This is useful during development mode to
@@ -17,20 +16,23 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from 'environments/environment';
 
 // -- IMPORT REDUCER --
-import * as user from './crud-entity/user.reducer';
+import * as person from './person/person.reducer';
+import * as router from './router-serializer';
 import * as crud from './crud/crud.reducer';
 import * as basic from './basic/basic.reducer';
 
 export interface State {
     // -- IMPORT STATE --
-	user: user.UserState;
+	person: person.PersonState;
+	router: RouterReducerState<router.RouterStateUrl>;
 	crud: crud.CrudState;
     basic: basic.BasicState;
 }
 
 export const reducers: ActionReducerMap<State> = {
     // -- ADD REDUCER --
-	user: user.reducer,
+	person: person.reducer,
+	router: routerReducer,
 	crud: crud.reducer,
     basic: basic.reducer
 };

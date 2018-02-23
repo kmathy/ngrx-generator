@@ -1,20 +1,20 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { UserService } from './user.service';
+import { PersonService } from './person.service';
 
-describe('Service: UserService', () => {
+describe('Service: PersonService', () => {
 
   let injector: TestBed;
-  let service: UserService;
+  let service: PersonService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [UserService]
+      providers: [PersonService]
     });
     injector = getTestBed();
-    service = injector.get(UserService);
+    service = injector.get(PersonService);
     httpMock = injector.get(HttpTestingController);
   });
 

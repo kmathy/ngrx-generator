@@ -10,7 +10,7 @@ export const LOAD_BASIC_FAIL =            '[Basic] Load Basic Fail';
 export class LoadBasicAction implements Action {
   readonly type = LOAD_BASIC;
 
-  constructor(public paylaod: any) { }
+  constructor(public payload: any) { }
 }
 
 export class LoadBasicSuccessAction implements Action {

@@ -1,9 +1,6 @@
-import "rxjs/add/observable/of";
-import "rxjs/add/observable/throw";
 import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { BasicEffects } from "./basic.effects";
 import { BasicService } from "./basic.service";
-import { Observable } from "rxjs/Observable";
 
 describe('BasicEffects', () => {
   let runner, basicEffects, basicService;

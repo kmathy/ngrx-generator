@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 export class CrudService {
 
   constructor(private http: HttpClient) { }
-
+  
   getCrud(): Observable<any> {
     return this.http.get('https://api.com');
   }
@@ -22,5 +22,4 @@ export class CrudService {
   deleteCrud(param: any): Observable<any> {
     return this.http.delete('https://api.com');
   }
-
 }

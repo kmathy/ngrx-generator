@@ -1,26 +1,21 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
-/**
- * Generate constants based on the given name
- * e.g export const GET_AUTH = '[Auth] Get Auth'
- */
-
 export const GET_CRUD =                 '[Crud] Get Crud';
 export const GET_CRUD_SUCCESS =         '[Crud] Get Crud Success';
 export const GET_CRUD_FAIL =            '[Crud] Get Crud Fail';
 
-export const CREATE_CRUD =              '[Crud] Create Crud';
-export const CREATE_CRUD_SUCCESS =      '[Crud] Create Crud Success';
-export const CREATE_CRUD_FAIL =         '[Crud] Create Crud Fail';
+export const CREATE_CRUD =                 '[Crud] Get Crud';
+export const CREATE_CRUD_SUCCESS =         '[Crud] Get Crud Success';
+export const CREATE_CRUD_FAIL =            '[Crud] Get Crud Fail';
 
-export const UPDATE_CRUD =              '[Crud] Update Crud';
-export const UPDATE_CRUD_SUCCESS =      '[Crud] Update Crud Success';
-export const UPDATE_CRUD_FAIL =         '[Crud] Update Crud Fail';
+export const UPDATE_CRUD =                 '[Crud] Get Crud';
+export const UPDATE_CRUD_SUCCESS =         '[Crud] Get Crud Success';
+export const UPDATE_CRUD_FAIL =            '[Crud] Get Crud Fail';
 
-export const DELETE_CRUD =              '[Crud] Delete Crud';
-export const DELETE_CRUD_SUCCESS =      '[Crud] Delete Crud Success';
-export const DELETE_CRUD_FAIL =         '[Crud] Delete Crud Fail';
+export const DELETE_CRUD =                 '[Crud] Get Crud';
+export const DELETE_CRUD_SUCCESS =         '[Crud] Get Crud Success';
+export const DELETE_CRUD_FAIL =            '[Crud] Get Crud Fail';
 
 /**
  * Get Crud Actions
@@ -112,11 +107,12 @@ export type Actions =
   | GetCrudSuccessAction
   | GetCrudFailAction
   | CreateCrudAction
-  | CreateCrudFailAction
   | CreateCrudSuccessAction
+  | CreateCrudFailAction
   | UpdateCrudAction
   | UpdateCrudSuccessAction
   | UpdateCrudFailAction
   | DeleteCrudAction
   | DeleteCrudSuccessAction
-  | DeleteCrudFailAction;
+  | DeleteCrudFailAction
+;
