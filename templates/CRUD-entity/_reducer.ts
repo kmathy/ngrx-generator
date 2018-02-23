@@ -208,3 +208,10 @@ export function reducer(state = initial{{ properCase name }}State, action: {{ ca
     }
   }
 }
+
+export const {
+  selectIds: select{{ properCase name }}IDs,
+  selectEntities: select{{ properCase name }}Entities,
+  selectAll: selectAll{{ properCase plural }},
+  selectTotal: select{{ properCase name }}Total
+} = {{ camelCase name }}Adapter.getSelectors();
