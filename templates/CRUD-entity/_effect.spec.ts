@@ -1,6 +1,6 @@
-import { fakeAsync, TestBed, tick } from "@angular/core/testing";
-import { {{properCase name}}Effects } from "{{position "effects"}}/{{kebabCase name}}.effects";
-import { {{properCase name}}Service } from "{{position "services"}}/{{kebabCase name}}.service";
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { {{properCase name}}Effects } from '{{position "effects"}}/{{kebabCase name}}.effects';
+import { {{properCase name}}Service } from '{{position "services"}}/{{kebabCase name}}.service';
 
 describe('{{properCase name}}Effects', () => {
   let runner, {{camelCase name}}Effects, {{camelCase name}}Service;
