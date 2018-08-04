@@ -1,6 +1,6 @@
-import { fakeAsync, TestBed, tick } from "@angular/core/testing";
-import { CrudEffects } from "./crud.effects";
-import { CrudService } from "./crud.service";
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { CrudEffects } from './crud.effects';
+import { CrudService } from './crud.service';
 
 describe('CrudEffects', () => {
   let runner, crudEffects, crudService;

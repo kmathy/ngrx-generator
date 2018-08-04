@@ -1,6 +1,6 @@
-import { fakeAsync, TestBed, tick } from "@angular/core/testing";
-import { PersonEffects } from "./person.effects";
-import { PersonService } from "./person.service";
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { PersonEffects } from './person.effects';
+import { PersonService } from './person.service';
 
 describe('PersonEffects', () => {
   let runner, personEffects, personService;
