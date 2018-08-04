@@ -2,9 +2,9 @@ import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
 {{#each crudMethods }}
-export const {{this}}_{{ constantCase ../name }} =                 '[{{ properCase ../name }}] Get {{ properCase ../name }}';
-export const {{this}}_{{ constantCase ../name }}_SUCCESS =         '[{{ properCase ../name }}] Get {{ properCase ../name }} Success';
-export const {{this}}_{{ constantCase ../name }}_FAIL =            '[{{ properCase ../name }}] Get {{ properCase ../name }} Fail';
+export const {{this}}_{{ constantCase ../name }} =                 '[{{ properCase ../name }}] {{ properCase this }} {{ properCase ../name }}';
+export const {{this}}_{{ constantCase ../name }}_SUCCESS =         '[{{ properCase ../name }}] {{ properCase this }} {{ properCase ../name }} Success';
+export const {{this}}_{{ constantCase ../name }}_FAIL =            '[{{ properCase ../name }}] {{ properCase this }} {{ properCase ../name }} Fail';
 
 {{/each}}
 {{#ifIn 'GET' crudMethods }}
