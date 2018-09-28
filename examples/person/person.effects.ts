@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
-import { catchError } from 'rxjs/operators/catchError';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { of as observableOf } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PersonService } from './person.service';
 import * as personActions from './person.actions';
@@ -24,8 +21,9 @@ export class PersonEffects {
     private actions$: Actions
   ) {
     this.loadPeople$ = this.actions$
-      .ofType(personActions.LOAD_PEOPLE)
-      .pipe(switchMap((state: personActions.LoadPeopleAction) =>
+      .pipe(
+        ofType(personActions.LOAD_PEOPLE),
+        switchMap((state: personActions.LoadPeopleAction) =>
         this.personService.loadPeople().pipe(
           // If successful, dispatch success action with result
           map(res => new personActions.LoadPeopleSuccessAction(res)),
@@ -35,8 +33,9 @@ export class PersonEffects {
       ));
 
     this.addPerson$ = this.actions$
-      .ofType(personActions.ADD_PERSON)
-      .pipe(switchMap((state: personActions.AddPersonAction) =>
+      .pipe(
+        ofType(personActions.ADD_PERSON),
+        switchMap((state: personActions.AddPersonAction) =>
         this.personService.addPerson(state.payload).pipe(
           map(res => new personActions.AddPersonSuccessAction(res)),
           catchError((err: HttpErrorResponse) => observableOf(new personActions.AddPersonFailAction(err)))
@@ -44,8 +43,9 @@ export class PersonEffects {
       ));
 
     this.addPeople$ = this.actions$
-      .ofType(personActions.ADD_PEOPLE)
-      .pipe(switchMap((state: personActions.AddPeopleAction) =>
+      .pipe(
+        ofType(personActions.ADD_PEOPLE),
+        switchMap((state: personActions.AddPeopleAction) =>
         this.personService.addPeople(state.payload).pipe(
           map(res => new personActions.AddPeopleSuccessAction(res)),
           catchError((err: HttpErrorResponse) => observableOf(new personActions.AddPeopleFailAction(err)))
@@ -53,8 +53,9 @@ export class PersonEffects {
       ));
 
     this.updatePerson$ = this.actions$
-      .ofType(personActions.UPDATE_PERSON)
-      .pipe(switchMap((state: personActions.UpdatePersonAction) =>
+      .pipe(
+        ofType(personActions.UPDATE_PERSON),
+        switchMap((state: personActions.UpdatePersonAction) =>
         this.personService.updatePerson(state.payload).pipe(
           map(res => new personActions.UpdatePersonSuccessAction(res)),
           catchError((err: HttpErrorResponse) => observableOf(new personActions.UpdatePersonFailAction(err)))
@@ -62,8 +63,9 @@ export class PersonEffects {
       ));
 
     this.updatePeople$ = this.actions$
-      .ofType(personActions.UPDATE_PEOPLE)
-      .pipe(switchMap((state: personActions.UpdatePeopleAction) =>
+      .pipe(
+        ofType(personActions.UPDATE_PEOPLE),
+        switchMap((state: personActions.UpdatePeopleAction) =>
         this.personService.updatePeople(state.payload).pipe(
           map(res => new personActions.UpdatePeopleSuccessAction(res)),
           catchError((err: HttpErrorResponse) => observableOf(new personActions.UpdatePeopleFailAction(err)))
@@ -71,8 +73,9 @@ export class PersonEffects {
       ));
 
     this.deletePerson$ = this.actions$
-      .ofType(personActions.DELETE_PERSON)
-      .pipe(switchMap((state: personActions.DeletePersonAction) =>
+      .pipe(
+        ofType(personActions.DELETE_PERSON),
+        switchMap((state: personActions.DeletePersonAction) =>
         this.personService.deletePerson(state.payload).pipe(
           map(res => new personActions.DeletePersonSuccessAction(res)),
           catchError((err: HttpErrorResponse) => observableOf(new personActions.DeletePersonFailAction(err)))
@@ -80,8 +83,9 @@ export class PersonEffects {
       ));
 
     this.deletePeople$ = this.actions$
-      .ofType(personActions.DELETE_PEOPLE)
-      .pipe(switchMap((state: personActions.DeletePeopleAction) =>
+      .pipe(
+        ofType(personActions.DELETE_PEOPLE),
+        switchMap((state: personActions.DeletePeopleAction) =>
         this.personService.deletePeople(state.payload).pipe(
           map(res => new personActions.DeletePeopleSuccessAction(res)),
           catchError((err: HttpErrorResponse) => observableOf(new personActions.DeletePeopleFailAction(err)))

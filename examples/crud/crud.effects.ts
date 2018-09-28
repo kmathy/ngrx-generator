@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
-import { catchError } from 'rxjs/operators/catchError';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { of as observableOf } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CrudService } from './crud.service';
 import * as crudActions from './crud.actions';
@@ -21,8 +18,9 @@ export class CrudEffects {
     private actions$: Actions
   ) {
     this.get$ = this.actions$
-      .ofType(crudActions.GET_CRUD)
-      .pipe(switchMap((state: crudActions.GetCrudAction) =>
+      .pipe(
+        ofType(crudActions.GET_CRUD),
+        switchMap((state: crudActions.GetCrudAction) =>
         this.crudService.getCrud().pipe(
           // If successful, dispatch success action with result
           map(res => new crudActions.GetCrudSuccessAction(res)),
@@ -31,8 +29,9 @@ export class CrudEffects {
         )
       ));
     this.create$ = this.actions$
-      .ofType(crudActions.CREATE_CRUD)
-      .pipe(switchMap((state: crudActions.CreateCrudAction) =>
+      .pipe(
+        ofType(crudActions.CREATE_CRUD),
+        switchMap((state: crudActions.CreateCrudAction) =>
         this.crudService.createCrud(state.payload).pipe(
           // If successful, dispatch success action with result
           map(res => new crudActions.CreateCrudSuccessAction(res)),
@@ -41,8 +40,9 @@ export class CrudEffects {
         )
       ));
     this.update$ = this.actions$
-      .ofType(crudActions.UPDATE_CRUD)
-      .pipe(switchMap((state: crudActions.UpdateCrudAction) =>
+      .pipe(
+        ofType(crudActions.UPDATE_CRUD),
+        switchMap((state: crudActions.UpdateCrudAction) =>
         this.crudService.updateCrud(state.payload).pipe(
           // If successful, dispatch success action with result
           map(res => new crudActions.UpdateCrudSuccessAction(res)),
@@ -51,8 +51,9 @@ export class CrudEffects {
         )
       ));
     this.delete$ = this.actions$
-      .ofType(crudActions.DELETE_CRUD)
-      .pipe(switchMap((state: crudActions.DeleteCrudAction) =>
+      .pipe(
+        ofType(crudActions.DELETE_CRUD),
+        switchMap((state: crudActions.DeleteCrudAction) =>
         this.crudService.deleteCrud(state.payload).pipe(
           // If successful, dispatch success action with result
           map(res => new crudActions.DeleteCrudSuccessAction(res)),
