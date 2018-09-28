@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
-import { of as observableOf } from 'rxjs/observable/of';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
-import { catchError } from 'rxjs/operators/catchError';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { of as observableOf } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { {{properCase name }}Service } from '{{position "services"}}/{{ kebabCase name }}.service';
 import * as {{ camelCase name }}Actions from '{{position "actions"}}/{{ kebabCase name }}.actions';
@@ -21,8 +18,9 @@ export class {{ properCase name }}Effects {
   ) {
     {{#each crudMethods}}
     this.{{ lowerCase this }}$ = this.actions$
-      .ofType({{ camelCase ../name }}Actions.{{this}}_{{ constantCase ../name }})
-      .pipe(switchMap((state: {{ camelCase ../name }}Actions.{{ properCase this }}{{ properCase ../name }}Action) =>
+      .pipe(
+        ofType({{ camelCase ../name }}Actions.{{this}}_{{ constantCase ../name }}),
+        switchMap((state: {{ camelCase ../name }}Actions.{{ properCase this }}{{ properCase ../name }}Action) =>
         this.{{ camelCase ../name }}Service.{{ lowerCase this }}{{ properCase ../name }}({{#isNotEqual this 'GET' }}state.payload{{/isNotEqual}}).pipe(
           // If successful, dispatch success action with result
           map(res => new {{ camelCase ../name }}Actions.{{ properCase this }}{{ properCase ../name }}SuccessAction(res)),
